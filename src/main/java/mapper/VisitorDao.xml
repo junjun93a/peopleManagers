@@ -13,4 +13,7 @@
     <select id="selectvisitorbyaccount" resultType="model.Visitor">
         select * from P_VISITOR where T_ACCOUNT=#{T_ACCOUNT}
     </select>
+    <select id="selectvisitorbyid" resultType="model.Visitor">
+        select * from P_VISITOR where T_ID=#{id}
+    </select>
 </mapper>

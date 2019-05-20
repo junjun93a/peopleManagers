@@ -20,9 +20,26 @@ public class Staff {
     private Integer T_WORKINGSTATE;//0试用，1在职，2离职
     private String T_REASON;
     private Integer T_IDPOSITION;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date T_ENTRYTIME;
 
 
     public Staff() {
+    }
+
+    public Staff(String t_ACCOUNT, String t_PASS, String t_NAME, String t_SEX, Date t_BIRTHDAY, Long t_PHONE, String t_EMAIL, Integer t_AGE, String t_ADDRESS, Integer t_WORKINGSTATE, Integer t_IDPOSITION, Date t_ENTRYTIME) {
+        T_ACCOUNT = t_ACCOUNT;
+        T_PASS = t_PASS;
+        T_NAME = t_NAME;
+        T_SEX = t_SEX;
+        T_BIRTHDAY = t_BIRTHDAY;
+        T_PHONE = t_PHONE;
+        T_EMAIL = t_EMAIL;
+        T_AGE = t_AGE;
+        T_ADDRESS = t_ADDRESS;
+        T_WORKINGSTATE = t_WORKINGSTATE;
+        T_IDPOSITION = t_IDPOSITION;
+        T_ENTRYTIME = t_ENTRYTIME;
     }
 
     public Staff(String t_ACCOUNT, String t_PASS, String t_NAME, String t_SEX, Date t_BIRTHDAY, Long t_PHONE, String t_EMAIL, Integer t_AGE, String t_ADDRESS, Integer t_WORKINGSTATE, String t_REASON, Integer t_IDPOSITION) {
@@ -38,6 +55,14 @@ public class Staff {
         T_WORKINGSTATE = t_WORKINGSTATE;
         T_REASON = t_REASON;
         T_IDPOSITION = t_IDPOSITION;
+    }
+
+    public Date getT_ENTRYTIME() {
+        return T_ENTRYTIME;
+    }
+
+    public void setT_ENTRYTIME(Date t_ENTRYTIME) {
+        T_ENTRYTIME = t_ENTRYTIME;
     }
 
     public Integer getT_ID() {
@@ -160,7 +185,7 @@ public class Staff {
                 ", 出生日期=" + T_BIRTHDAY +
                 ", 手机号码=" + T_PHONE +
                 ", 邮箱地址='" + T_EMAIL + '\'' +
-
+                ", 入职时间='" + T_ENTRYTIME + '\'' +
                 '}';
     }
 
@@ -175,6 +200,7 @@ public class Staff {
                 ", 邮箱地址='" + T_EMAIL + '\'' +
                 ", 工龄=" + T_AGE +
                 ", 地址='" + T_ADDRESS + '\'' +
+                ", 入职时间='" + T_ENTRYTIME + '\'' +
                 '}';
     }
 }

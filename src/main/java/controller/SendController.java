@@ -1,20 +1,16 @@
 package controller;
 
-import model.Recruit;
-import model.Resume;
-import model.Send;
-import model.Visitor;
+import model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import service.RecruitService;
-import service.ResumeService;
-import service.SendService;
+import service.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,6 +22,10 @@ public class SendController {
     private ResumeService resumeService;
     @Resource
     private RecruitService recruitService;
+    @Resource
+    private StaffService staffService;
+    @Resource
+    private VisitorService visitorService;
 
     @RequestMapping("tosend")
     public String tosend(Integer rid,HttpSession session, HttpServletRequest req, HttpServletResponse resp)throws Exception{
@@ -142,4 +142,66 @@ public class SendController {
             resp.getWriter().write("<script>alert(\"放弃参加面试失败\");window.location.href='tosendview';</script>");
         }
     }
+
+
+
+    @RequestMapping("toreadresume")
+    public String toreadresume(Integer reid,Integer seid, HttpServletResponse resp,HttpSession session)throws Exception{
+        resp.setContentType("text/html;charset=UTF-8");
+        Resume resume = resumeService.selectResumebyid(reid);
+       session.setAttribute("sendresume",resume);
+        if(sendService.updateSendbyseid(seid,1)){
+            return "sendresume";
+        }else {
+           return "forward:toasendview";
+        }
+    }
+
+    @RequestMapping("tointerview")
+    public void interview(Integer reid, Date time, HttpServletResponse resp, HttpSession session)throws Exception {
+        resp.setContentType("text/html;charset=UTF-8");
+        Send send = sendService.selectSendbyid(reid);
+        send.setT_STATE(2);
+        send.setT_TIME(time);
+        if(sendService.updateSendTime(send)){
+            resp.getWriter().write("<script>alert(\"发送成功\");window.location.href='toasendview';</script>");
+        }else {
+            resp.getWriter().write("<script>alert(\"发送失败\");window.location.href='toasendview';</script>");
+        }
+    }
+
+
+    @RequestMapping("tonostaff")
+    public void tonostaff(Integer sid,  HttpServletResponse resp, HttpSession session)throws Exception {
+        resp.setContentType("text/html;charset=UTF-8");
+        Send send = sendService.selectSendbyid(sid);
+        send.setT_STATE(4);
+        if(sendService.updateSend(send)){
+            resp.getWriter().write("<script>alert(\"成功\");window.location.href='toasendview';</script>");
+        }else {
+            resp.getWriter().write("<script>alert(\"失败\");window.location.href='toasendview';</script>");
+        }
+    }
+    @RequestMapping("toyesstaff")
+    public void toyesstaff(Integer sid,  HttpServletResponse resp, HttpSession session)throws Exception {
+        resp.setContentType("text/html;charset=UTF-8");
+        Send send = sendService.selectSendbyid(sid);
+        Resume resume = resumeService.selectResumebyid(send.getT_IDRESUME());
+        Visitor visitor = visitorService.selectvisitorbyid(resume.getT_IDVISITOR());
+        Recruit recruit = recruitService.selectRecruitById(send.getT_IDRECRUIT());
+        String account=visitor.getT_ACCOUNT()+resume.getT_PHONE()%100;
+        String pass=visitor.getT_PASS();
+        String name=resume.getT_NAME();
+        String sex=resume.getT_SEX();
+        Date birthday=resume.getT_BIRTHDAY();
+        Long phone=resume.getT_PHONE();
+        String email=resume.getT_EMAIL();
+        Integer age=resume.getT_AGE();
+        String address=resume.getT_ADDRESS();
+        Integer workingstate=0;
+        Integer position=recruit.getT_POSITION();
+        Date entrytime=new Date();
+        Staff staff=new Staff();
+    }
+
 }

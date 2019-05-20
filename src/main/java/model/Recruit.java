@@ -10,8 +10,8 @@ public class Recruit {
     private Integer T_ID;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date T_DATE;
-    private String T_DEPARTMENT;
-    private String T_POSITION;
+    private Integer T_DEPARTMENT;
+    private Integer T_POSITION;
     private Double T_MONEY;
     private String T_EDUCATION;
     private Integer T_AGE;
@@ -22,7 +22,7 @@ public class Recruit {
     public Recruit() {
     }
 
-    public Recruit(Date t_DATE, String t_DEPARTMENT, String t_POSITION, Double t_MONEY, String t_EDUCATION, Integer t_AGE, Integer t_LAUNCH, String t_DETAIL, String t_CITY) {
+    public Recruit(Date t_DATE, Integer t_DEPARTMENT, Integer t_POSITION, Double t_MONEY, String t_EDUCATION, Integer t_AGE, Integer t_LAUNCH, String t_DETAIL, String t_CITY) {
         T_DATE = t_DATE;
         T_DEPARTMENT = t_DEPARTMENT;
         T_POSITION = t_POSITION;
@@ -64,19 +64,19 @@ public class Recruit {
         T_DATE = t_DATE;
     }
 
-    public String getT_DEPARTMENT() {
+    public Integer getT_DEPARTMENT() {
         return T_DEPARTMENT;
     }
 
-    public void setT_DEPARTMENT(String t_DEPARTMENT) {
+    public void setT_DEPARTMENT(Integer t_DEPARTMENT) {
         T_DEPARTMENT = t_DEPARTMENT;
     }
 
-    public String getT_POSITION() {
+    public Integer getT_POSITION() {
         return T_POSITION;
     }
 
-    public void setT_POSITION(String t_POSITION) {
+    public void setT_POSITION(Integer t_POSITION) {
         T_POSITION = t_POSITION;
     }
 

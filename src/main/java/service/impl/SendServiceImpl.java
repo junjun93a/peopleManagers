@@ -43,6 +43,17 @@ public class SendServiceImpl implements SendService {
     }
 
     @Override
+    public boolean updateSendbyseid(Integer seid, Integer state) {
+        if (seid==null||seid==0||state==null||state==0){
+            return false;
+        }
+        Send send = selectSendbyid(seid);
+        send.setT_STATE(1);
+        boolean b = updateSend(send);
+        return b;
+    }
+
+    @Override
     public boolean updateSendTime(Send send) {
         if (send==null){
             return false;

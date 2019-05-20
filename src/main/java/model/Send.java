@@ -16,7 +16,7 @@ public class Send {
     private Date T_TIME;
     private String T_RECRUITDE;
     private String T_RESUMEDE;
-
+    private Integer T_IDSTAFF;
     public Send() {
     }
 
@@ -27,6 +27,14 @@ public class Send {
         T_STATE = t_STATE;
         T_RECRUITDE = t_RECRUITDE;
         T_RESUMEDE = t_RESUMEDE;
+    }
+
+    public Integer getT_IDSTAFF() {
+        return T_IDSTAFF;
+    }
+
+    public void setT_IDSTAFF(Integer t_IDSTAFF) {
+        T_IDSTAFF = t_IDSTAFF;
     }
 
     public String getT_RECRUITDE() {

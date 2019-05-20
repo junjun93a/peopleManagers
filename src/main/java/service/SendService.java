@@ -7,6 +7,7 @@ import java.util.List;
 public interface SendService {
     boolean insertSend(Send send);
     boolean updateSend(Send send);
+    boolean updateSendbyseid(Integer seid,Integer state);
     boolean updateSendTime(Send send);
     boolean deleteSend(Integer T_ID);
     List<Send> selectSendbyrid(Integer T_IDRECRUIT);//按招聘查

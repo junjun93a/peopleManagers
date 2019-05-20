@@ -24,7 +24,11 @@ public class test {
         StaffDao staffDao= (StaffDao) context.getBean("staffDao");
         List<Staff> staff = staffDao.selectStaffbydepartmentid(1);
         System.out.println(staff);
-
-
     }
+    @Test
+    public void test2(){
+       int i= 11111%100;
+        System.out.println(i);
+    }
+
 }

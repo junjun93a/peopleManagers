@@ -63,7 +63,7 @@
             <span>工作经历：<%=resume1.getT_WORKEXPERIENCE()%></span>  <span>语言技能：<%=resume1.getT_LANGUAGE()%></span><br>
 
             </p>
-            <h4>附加信息：<%=resume1.getT_ADDINFORMATION()%></h4>
+            <span>附加信息：<%=resume1.getT_ADDINFORMATION()%></span>
         </div>
     </li>
     <li>

@@ -33,6 +33,14 @@ public class VisitorServiceImpl implements VisitorService {
         return visitorDao.selectvisitorbyaccountpass(visitor);
     }
 
+    @Override
+    public Visitor selectvisitorbyid(Integer id) {
+        if(id==null ||id==0){
+            return null;
+        }
+        return visitorDao.selectvisitorbyid(id);
+    }
+
     public boolean selectvisitorbyaccount(Visitor visitor) {
         if(visitor==null ){
             return false;
