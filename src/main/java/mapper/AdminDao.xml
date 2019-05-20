@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.AdminDao">
+
+    <select id="selectvisitorbyaccountpass" resultType="model.Admin">
+         select * from P_ADMIN where T_ACCOUNT=#{T_ACCOUNT} AND T_PASS=#{T_PASS}
+    </select>
+</mapper>

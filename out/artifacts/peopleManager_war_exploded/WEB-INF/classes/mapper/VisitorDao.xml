@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.VisitorDao">
+    <insert id="insertvisitor">
+        insert into P_VISITOR(T_ACCOUNT,T_PASS,T_SEX,T_NAME) values (#{T_ACCOUNT},#{T_PASS},#{T_SEX},#{T_NAME})
+    </insert>
+
+    <select id="selectvisitorbyaccountpass" resultType="model.Visitor">
+        select * from P_VISITOR where T_ACCOUNT=#{T_ACCOUNT} AND T_PASS=#{T_PASS}
+    </select>
+    <select id="selectvisitorbyaccount" resultType="model.Visitor">
+        select * from P_VISITOR where T_ACCOUNT=#{T_ACCOUNT}
+    </select>
+</mapper>

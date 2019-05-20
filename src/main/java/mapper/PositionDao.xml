@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.PositionDao">
+
+    <insert id="insertPosition">
+        insert into P_POSITION ( T_NAME, T_IDDEPARTMENT) values (#{T_NAME},#{T_IDDEPARTMENT})
+    </insert>
+    <update id="updatePosition">
+        UPDATE P_POSITION SET T_NAME=#{T_NAME}
+    </update>
+    <delete id="deletePosition">
+        DELETE FROM P_POSITION WHERE T_ID=#{T_ID}
+    </delete>
+    <delete id="deletePositionbydid">
+        DELETE FROM P_POSITION WHERE T_IDDEPARTMENT=#{did}
+    </delete>
+    <select id="selectPositionbyid" resultType="model.Position">
+        SELECT * FROM P_POSITION WHERE T_ID=#{T_ID}
+    </select>
+    <select id="selectAllPosition" resultType="model.Position">
+        SELECT * FROM P_POSITION
+    </select>
+    <select id="selectPositionbydid" resultType="model.Position">
+        SELECT * FROM P_POSITION WHERE T_IDDEPARTMENT=#{did}
+    </select>
+    <select id="selectPositionbynameanddid" resultType="model.Position">
+        SELECT * FROM P_POSITION WHERE T_IDDEPARTMENT=#{0} and T_NAME=#{1}
+    </select>
+
+</mapper>

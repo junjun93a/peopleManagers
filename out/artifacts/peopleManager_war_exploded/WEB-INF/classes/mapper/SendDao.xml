@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.SendDao">
+
+    <insert id="insertSend">
+        insert into P_SEND (T_IDRECRUIT, T_IDVISITOR, T_IDRESUME, T_STATE,T_RECRUITDE,T_RESUMEDE) VALUES (#{T_IDRECRUIT},#{T_IDVISITOR},#{T_IDRESUME},#{T_STATE},#{T_RECRUITDE},#{T_RESUMEDE})
+    </insert>
+    <update id="updateSend">
+        UPDATE P_SEND SET T_IDRECRUIT=#{T_IDRECRUIT}, T_IDVISITOR=#{T_IDVISITOR}, T_IDRESUME=#{T_IDRESUME}, T_STATE=#{T_STATE},T_RECRUITDE=#{T_RECRUITDE},T_RESUMEDE=#{T_RESUMEDE} WHERE T_ID=#{T_ID}
+    </update>
+    <update id="updateSendTime">
+        UPDATE P_SEND SET T_TIME=#{T_TIME} where T_ID=#{T_ID}
+    </update>
+    <delete id="deleteSend">
+        DELETE FROM P_SEND WHERE T_ID=#{T_ID}
+    </delete>
+    <select id="selectSendbyrid" resultType="model.Send">
+        SELECT * FROM P_SEND WHERE T_IDRECRUIT=#{T_IDRECRUIT}
+    </select>
+    <select id="selectSendbyid" resultType="model.Send">
+        SELECT * FROM P_SEND WHERE T_ID=#{id}
+    </select>
+    <select id="selectSendbystaff"  parameterType="integer" resultType="model.Send">
+        SELECT * FROM P_SEND
+        <where>
+        <if test="_parameter!=null and parameter!=0">
+            T_STATE=#{staff}
+        </if>
+    </where>
+    </select>
+    <select id="selectSendbystaffvisitor" resultType="model.Send">
+        SELECT * FROM P_SEND where  T_IDVISITOR=#{1} and T_STATE=#{0}
+    </select>
+    <select id="selectSendbyvisitor" resultType="model.Send">
+         SELECT * FROM P_SEND where  T_IDVISITOR=#{vid}
+    </select>
+    <select id="selectSendbystaffs" resultType="model.Send">
+        SELECT * FROM P_SEND where
+        <foreach collection="list" open="T_STATE in(" separator="," close=")" item="i">
+        #{i}
+    </foreach>
+    </select>
+</mapper>

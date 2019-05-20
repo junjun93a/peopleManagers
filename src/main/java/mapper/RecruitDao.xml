@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.RecruitDao">
+    <insert id="insertRecruit">
+        insert into P_RECRUIT (T_DEPARTMENT, T_POSITION, T_MONEY, T_EDUCATION, T_AGE, T_LAUNCH, T_DETAIL, T_CITY) VALUES
+                              (#{T_DEPARTMENT},#{T_POSITION},#{T_MONEY},#{T_EDUCATION},#{T_AGE},#{T_LAUNCH},#{T_DETAIL},#{T_CITY})
+    </insert>
+    <update id="updateRecruit">
+        update P_RECRUIT set T_DEPARTMENT=#{T_DEPARTMENT}, T_POSITION=#{T_POSITION}, T_MONEY=#{T_MONEY}, T_EDUCATION=#{T_EDUCATION}, T_AGE=#{T_AGE}, T_DETAIL=#{T_DETAIL}, T_CITY=#{T_CITY} where T_ID=#{T_ID}
+    </update>
+    <update id="updateRecruitDate">
+        update P_RECRUIT set T_DATE=#{T_DATE},T_LAUNCH=#{T_LAUNCH} where T_ID=#{T_ID}
+    </update>
+    <delete id="deleteRecruit">
+        delete from P_RECRUIT where T_ID=#{id}
+    </delete>
+    <select id="selectAllLaunchRecruit" resultType="model.Recruit">
+        select * from P_RECRUIT WHERE T_LAUNCH=1
+    </select>
+    <select id="selectRecruitById" resultType="model.Recruit">
+        select * from P_RECRUIT WHERE T_ID=#{id}
+    </select>
+    <select id="selectAllhRecruit" resultType="model.Recruit">
+        select * from P_RECRUIT
+    </select>
+
+
+</mapper>

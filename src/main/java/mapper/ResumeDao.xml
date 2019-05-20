@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ResumeDao">
+
+    <insert id="insertResume">
+        insert into P_RESUME(T_BIRTHDAY, T_PHONE, T_EMAIL, T_ADDRESS, T_AGE, T_HOPEMONEY, T_EDUCATION, T_HOPEPOSITION, T_WORKEXPERIENCE, T_LANGUAGE, T_ADDINFORMATION, T_IDVISITOR, T_SEX, T_NAME)
+        VALUES (#{T_BIRTHDAY}, #{T_PHONE}, #{T_EMAIL}, #{T_ADDRESS}, #{T_AGE}, #{T_HOPEMONEY}, #{T_EDUCATION}, #{T_HOPEPOSITION}, #{T_WORKEXPERIENCE}, #{T_LANGUAGE}, #{T_ADDINFORMATION}, #{T_IDVISITOR}, #{T_SEX}, #{T_NAME})
+    </insert>
+    <update id="updateResume">
+        update P_RESUME set  T_BIRTHDAY=#{T_BIRTHDAY}, T_PHONE=#{T_PHONE}, T_EMAIL=#{T_EMAIL}, T_ADDRESS=#{T_ADDRESS}, T_AGE=#{T_AGE}, T_HOPEMONEY=#{T_HOPEMONEY}, T_EDUCATION=#{T_EDUCATION}, T_HOPEPOSITION=#{T_HOPEPOSITION}, T_WORKEXPERIENCE=#{T_WORKEXPERIENCE}, T_LANGUAGE=#{T_LANGUAGE}, T_ADDINFORMATION=#{T_ADDINFORMATION}, T_IDVISITOR=#{T_IDVISITOR}, T_SEX=#{T_SEX}, T_NAME=#{T_NAME} WHERE T_ID=#{T_ID}
+    </update>
+    <delete id="deleteResume">
+        delete from P_RESUME where T_ID=#{T_ID}
+    </delete>
+    <select id="selectResumebyvid" resultType="model.Resume">
+        SELECT * FROM P_RESUME WHERE T_IDVISITOR=#{vid}
+    </select>
+    <select id="selectResumebyid" resultType="model.Resume">
+         SELECT * FROM P_RESUME WHERE T_ID=#{id}
+    </select>
+</mapper>

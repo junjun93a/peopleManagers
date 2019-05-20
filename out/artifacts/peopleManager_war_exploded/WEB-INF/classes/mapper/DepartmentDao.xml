@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.DepartmentDao">
+
+    <insert id="insertDepartment">
+insert into P_DEPARTMENT ( T_NAME, T_TIME) VALUES (#{T_NAME},#{T_TIME})
+    </insert>
+    <update id="updateDepartment">
+UPDATE P_DEPARTMENT SET T_NAME=#{T_NAME} WHERE T_ID=#{T_ID}
+    </update>
+    <delete id="deleteDepartment">
+DELETE  FROM P_DEPARTMENT WHERE T_ID=#{T_ID}
+    </delete>
+    <select id="selectDepartmentbyid" resultType="model.Department">
+SELECT * FROM P_DEPARTMENT WHERE T_ID=#{id}
+    </select>
+    <select id="selectAllDepartment" resultType="model.Department">
+SELECT * FROM P_DEPARTMENT
+    </select>
+    <select id="selectDepartmentbyname" resultType="model.Department">
+        SELECT * FROM P_DEPARTMENT WHERE T_NAME=#{name}
+    </select>
+</mapper>
