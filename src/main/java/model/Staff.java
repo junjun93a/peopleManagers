@@ -188,7 +188,12 @@ public class Staff {
                 ", 入职时间='" + T_ENTRYTIME + '\'' +
                 '}';
     }
-
+    public String toStringap() {
+        return "账号密码{" +
+                ", 账号='" + T_ACCOUNT + '\'' +
+                ", 密码='" + T_PASS + '\'' +
+                '}';
+    }
     @Override
     public String toString() {
         return "员工信息{" +

@@ -1,8 +1,11 @@
 package service.impl;
 
+import dao.SendDao;
 import dao.StaffDao;
+import model.Send;
 import model.Staff;
 import org.springframework.stereotype.Service;
+import service.SendService;
 import service.StaffService;
 
 import javax.annotation.Resource;
@@ -12,15 +15,19 @@ public class StaffServiceImpl implements StaffService {
 
     @Resource
     private StaffDao staffDao;
-
+    @Resource
+    private SendDao sendDao;
     @Override
-    public boolean insertStaff(Staff staff) {
+    public boolean insertStaff(Staff staff,Integer sid) {
 
         if (staff==null){
             return false;
         }
-        Integer i = staffDao.insertStaff(staff);
-
+        staffDao.insertStaff(staff);
+        Staff staff1 = staffDao.selectStaffbyaccountandpass(staff);
+        Send send = sendDao.selectSendbyid(sid);
+        send.setT_IDSTAFF(staff1.getT_ID());
+        Integer i = sendDao.updateSend(send);
         if(i!=0){
             return true;
         }else {

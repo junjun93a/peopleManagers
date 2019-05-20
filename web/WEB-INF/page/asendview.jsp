@@ -126,6 +126,6 @@
 %>
 <br>
 <hr>
-<a href="/toadmin">返回</a>
+<a href="toadmin">返回</a>
 </body>
 </html>

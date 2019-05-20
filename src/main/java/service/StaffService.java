@@ -5,7 +5,7 @@ import model.Staff;
 import java.util.List;
 
 public interface StaffService {
-    boolean insertStaff(Staff staff);
+    boolean insertStaff(Staff staff,Integer sid);
     boolean updateStaff(Staff staff);
     boolean deleteStaff(Integer T_ID);
     Staff selectStaffbyid(Integer id);

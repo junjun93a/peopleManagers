@@ -202,7 +202,12 @@ public class SendController {
         Integer position=recruit.getT_POSITION();
         Date entrytime=new Date();
         Staff staff=new Staff(account,pass,name,sex,birthday,phone,email,age,address,workingstate,position,entrytime);
+        if(staffService.insertStaff(staff,sid)){
+            resp.getWriter().write("<script>alert(\"录取成功\");window.location.href='toasendview';</script>");
 
+        }else {
+            resp.getWriter().write("<script>alert(\"录取失败\");window.location.href='toasendview';</script>");
+        }
     }
 
 }
