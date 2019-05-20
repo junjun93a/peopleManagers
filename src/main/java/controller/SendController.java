@@ -201,7 +201,8 @@ public class SendController {
         Integer workingstate=0;
         Integer position=recruit.getT_POSITION();
         Date entrytime=new Date();
-        Staff staff=new Staff();
+        Staff staff=new Staff(account,pass,name,sex,birthday,phone,email,age,address,workingstate,position,entrytime);
+
     }
 
 }
