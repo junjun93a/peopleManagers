@@ -26,4 +26,5 @@
     <select id="selectStaffbydepartmentid" resultType="model.Staff">
          SELECT * FROM P_STAFF WHERE T_IDPOSITION in (select T_ID FROM  P_POSITION WHERE T_IDDEPARTMENT=#{did}) and T_WORKINGSTATE=1
     </select>
+    <select id="selectStaffbyallposition" resultType="model.Staff">SELECT * FROM P_STAFF WHERE T_IDPOSITION=#{pid}</select>
 </mapper>

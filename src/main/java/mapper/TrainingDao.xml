@@ -4,10 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.TrainingDao">
 
-    <insert id="insertTraining"></insert>
-    <update id="updateTraining"></update>
-    <delete id="deleteTraining"></delete>
-    <select id="selectAllLaunchTraining" resultType="model.Training"></select>
-    <select id="selectAllTraining" resultType="model.Training"></select>
-    <select id="selectTrainingById" resultType="model.Training"></select>
+    <insert id="insertTraining">
+        insert into P_TRAINING ( T_TITLE, T_DETAIL, T_STARTTIME, T_ENDTIME, T_ADDRESS, T_LAUNCH)
+        VALUES (#{T_TITLE},#{T_DETAIL},#{T_STARTTIME},#{T_ENDTIME},#{T_ADDRESS},#{T_LAUNCH})
+    </insert>
+    <update id="updateTraining">
+        UPDATE P_TRAINING SET T_TITLE=#{T_TITLE}, T_DETAIL=#{T_DETAIL}, T_STARTTIME=#{T_STARTTIME}, T_ENDTIME=#{T_ENDTIME}, T_ADDRESS=#{T_ADDRESS}, T_LAUNCH=#{T_LAUNCH} WHERE T_ID=#{T_ID}
+    </update>
+    <delete id="deleteTraining">
+        DELETE FROM P_TRAINING WHERE T_ID=#{id}
+    </delete>
+    <select id="selectAllLaunchTraining" resultType="model.Training">
+SELECT * FROM P_TRAINING WHERE T_LAUNCH=1
+    </select>
+    <select id="selectAllTraining" resultType="model.Training">
+select * from P_TRAINING
+    </select>
+    <select id="selectTrainingById" resultType="model.Training">
+select * from P_TRAINING where T_ID=#{id}
+    </select>
 </mapper>

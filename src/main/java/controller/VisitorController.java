@@ -45,7 +45,7 @@ public class VisitorController {
             Staff staff1 = staffService.selectStaffbyaccountandpass(staff);
             if(staff1!=null){
                 session.setAttribute("staff",staff1);
-                return "staffview";
+                return "forward：tostaffview";
             }
             return "loginview";
         }else if(log.equals("admin")){

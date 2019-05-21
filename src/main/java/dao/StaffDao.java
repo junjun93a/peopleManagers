@@ -11,6 +11,7 @@ public interface StaffDao {
     Integer deleteStaff(Integer T_ID);
     Staff selectStaffbyid(Integer id);
     Staff selectStaffbyaccountandpass(Staff staff);
+    List<Staff> selectStaffbyallposition(Integer pid);
     List<Staff> selectStaffbyposition(Integer pid);
     List<Staff> selectStaffbydepartmentid(Integer did);
 }

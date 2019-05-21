@@ -32,6 +32,7 @@
     </script>
 </head>
 <body>
+<a href="tostaffview">返回</a>
 <%
     List<Department> departments =(List<Department>) session.getAttribute("alldepartment");
 %>
@@ -56,7 +57,7 @@
             $.post("selectstaffbypid",{"pid":$("#posit").val()},function (obj) {
                 $("#showstaff span").remove();
                 for(var i in obj){
-                    $("#showstaff").append("<span>姓名："+obj[i]['T_NAME']+"性别："+obj[i]['T_SEX']+"生日："+obj[i]['T_BIRTHDAY']+"电话："+obj[i]['T_PHONE']+"邮箱："+obj[i]['T_EMAIL']+"</span>")
+                    $("#showstaff").append("<p>姓名："+obj[i]['T_NAME']+"性别："+obj[i]['T_SEX']+"生日："+obj[i]['T_BIRTHDAY']+"电话："+obj[i]['T_PHONE']+"邮箱："+obj[i]['T_EMAIL']+"</p>")
                 }
             })
         })

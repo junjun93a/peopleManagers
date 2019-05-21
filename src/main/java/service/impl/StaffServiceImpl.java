@@ -79,6 +79,14 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public List<Staff> selectStaffbyallposition(Integer pid) {
+        if (pid==null||pid==0){
+            return null;
+        }
+        return staffDao.selectStaffbyallposition(pid);
+    }
+
+    @Override
     public List<Staff> selectStaffbyposition(Integer pid) {
         if (pid==null||pid==0){
             return null;

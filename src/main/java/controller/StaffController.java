@@ -1,9 +1,11 @@
 package controller;
 
 import model.Department;
+import model.Position;
 import model.Staff;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import service.DepartmentService;
 import service.StaffService;
 
@@ -21,10 +23,16 @@ public class StaffController {
     private DepartmentService departmentService;
 
 
+    @RequestMapping("tostaffview")
+    public String toshowstaff()throws Exception {
+       return "staffview";
+
+    }
+
     @RequestMapping("toshowstaff")
     public String toshowstaff(Integer pid,HttpServletRequest request, HttpSession session, HttpServletResponse resp)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
-        List<Staff> staff = staffService.selectStaffbyposition(pid);
+        List<Staff> staff = staffService.selectStaffbyallposition(pid);
         session.setAttribute("pstaff",staff);
         return "showstaff";
 
@@ -36,4 +44,11 @@ public class StaffController {
         return "stafflist";
 
     }
+    @RequestMapping("selectstaffbypid")
+    @ResponseBody
+    public List<Staff> selectpositbypid(Integer pid){
+
+        return  staffService.selectStaffbyposition(pid);
+    }
+
 }

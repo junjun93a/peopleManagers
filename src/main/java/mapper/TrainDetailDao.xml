@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.TrainDetailDao">
+
+    <insert id="insertTraindetail">
+        insert into P_TRAINDETAIL ( T_IDSTAFF, T_IDTRAINING) VALUES ()
+    </insert>
+    <update id="updateTraindetail">
+        update P_TRAINDETAIL SET T_IDSTAFF=#{T_IDSTAFF},T_IDTRAINING=#{T_IDTRAINING} WHERE T_ID=#{T_ID}
+    </update>
+    <delete id="deleteTraindetail">
+        DELETE FROM P_TRAINDETAIL WHERE T_ID=#{id}
+    </delete>
+    <select id="selectTraindetailById" resultType="model.TrainDetail">
+        SELECT * FROM P_TRAINDETAIL WHERE T_ID=#{id}
+    </select>
+    <select id="selectTraindetailbystaff" resultType="model.TrainDetail">
+select * from P_TRAINDETAIL where T_IDSTAFF=#{sid}
+    </select>
+    <select id="selectTraindetailbyTraining" resultType="model.TrainDetail">
+select * from P_TRAINDETAIL where T_IDTRAINING=#{tid}
+    </select>
+</mapper>

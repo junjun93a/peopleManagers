@@ -15,7 +15,7 @@ public class Training {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date T_ENDTIME;
     private String T_ADDRESS;
-    private Integer T_LAUNCH;
+    private Integer T_LAUNCH;//0,1发布
 
 
     public Training() {
