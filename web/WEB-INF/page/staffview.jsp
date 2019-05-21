@@ -17,6 +17,8 @@
 </head>
 <body>
 <a href="tostafflist">查看通讯录</a>
+<a href="">查看个人信息</a>
+<a href="totrainingview">查看培训信息</a>
 <a href="logout">退出</a>
 </body>
 </html>

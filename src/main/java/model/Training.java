@@ -97,14 +97,12 @@ public class Training {
 
     @Override
     public String toString() {
-        return "Training{" +
-                "T_ID=" + T_ID +
-                ", T_TITLE='" + T_TITLE + '\'' +
-                ", T_DETAIL='" + T_DETAIL + '\'' +
-                ", T_STARTTIME=" + T_STARTTIME +
-                ", T_ENDTIME=" + T_ENDTIME +
-                ", T_ADDRESS='" + T_ADDRESS + '\'' +
-                ", T_LAUNCH=" + T_LAUNCH +
+        return "培训：{" +
+                ", 培训标题='" + T_TITLE + '\'' +
+                ", 开始时间=" + getT_STARTTIMES() +
+                ", 结束时间=" + getT_ENDTIMES() +
+                ", 培训地点='" + T_ADDRESS + '\'' +
+                ", 培训内容='" + T_DETAIL + '\'' +
                 '}';
     }
 }

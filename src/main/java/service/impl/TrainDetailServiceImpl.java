@@ -19,31 +19,67 @@ public class TrainDetailServiceImpl implements TrainDetailService {
 
     @Override
     public boolean insertTraindetail(TrainDetail traindetail) {
-        return null;
+        if (traindetail==null){
+            return false;
+        }
+        Integer i = trainDetailDao.insertTraindetail(traindetail);
+
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public boolean updateTraindetail(TrainDetail traindetail) {
-        return null;
+        if (traindetail==null){
+            return false;
+        }
+        Integer i = trainDetailDao.updateTraindetail(traindetail);
+
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public boolean deleteTraindetail(Integer id) {
-        return null;
+        if (id==null||id==0){
+            return false;
+        }
+        Integer i = trainDetailDao.deleteTraindetail(id);
+
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public TrainDetail selectTraindetailById(Integer id) {
-        return null;
+        if (id==null||id==0){
+            return null;
+        }
+        return trainDetailDao.selectTraindetailById(id);
     }
 
     @Override
     public List<TrainDetail> selectTraindetailbystaff(Integer sid) {
-        return null;
+        if (sid==null||sid==0){
+            return null;
+        }
+        return trainDetailDao.selectTraindetailbystaff(sid);
     }
 
     @Override
     public List<TrainDetail> selectTraindetailbyTraining(Integer tid) {
-        return null;
+        if (tid==null||tid==0){
+            return null;
+        }
+        return trainDetailDao.selectTraindetailbystaff(tid);
     }
 }

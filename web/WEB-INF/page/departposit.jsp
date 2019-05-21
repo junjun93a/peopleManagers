@@ -99,13 +99,14 @@
                 <p>成立时间：<%=department.getT_TIMES()%></p>
                 <a href="deletedepartment?did=<%=department.getT_ID()%>">删除部门</a>
                 <input type="button" value="修改部门" id="updatedepartment<%=i%>">
-                <div id="updepart"></div>
+                <div id="updepart<%=i%>"></div>
                 <script>
                     $(function () {
                         var a=<%=i%>
                         var uppid='updatedepartment'+a
+                        var tid='updepart'+a
                         $("#"+uppid).click(function () {
-                            $('#updepart').append("<form method=\"post\" action=\"updatedepartment\">\n" +
+                            $('#'+tid).append("<form method=\"post\" action=\"updatedepartment\">\n" +
                                 "    部门名称：<input name=\"T_NAME\" type=\"text\"><br>\n" +
                                 "    <input type=\"hidden\" value=\"<%=department.getT_ID()%>\" name=\"did\">\n" +
                                 "    <input type=\"submit\" value=\"修改\">\n" +
@@ -130,13 +131,14 @@
                         <span><%=position.getT_NAME()%></span>
                         <a href="deleteposition?pid=<%=position.getT_ID()%>">删除职位</a>
                         <input type="button" value="修改职位" id="updateposition<%=j%>">
-                        <div id="upposit"></div>
+                        <div id="upposit<%=j%>"></div>
                         <script>
                             $(function () {
                                 var a=<%=j%>
                                 var uppid='updateposition'+a
+                                var tid='upposit'+a
                                 $("#"+uppid).click(function () {
-                                    $('#upposit').append("<form action=\"updateposition\" method=\"post\">\n" +
+                                    $('#'+tid).append("<form action=\"updateposition\" method=\"post\">\n" +
                                         "    职位名称：<input name=\"T_NAME\" type=\"text\"><br>\n" +
                                         "    <input type=\"hidden\" value=\"<%=position.getT_ID()%>\" name=\"pid\">\n" +
                                         "    <input type=\"hidden\" value=\"<%=department.getT_ID()%>\" name=\"did\">\n" +

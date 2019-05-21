@@ -67,6 +67,9 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public Training selectTrainingById(Integer id) {
+        if (id==null||id==0){
+            return null;
+        }
         return trainingDao.selectTrainingById(id);
     }
 }
