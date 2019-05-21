@@ -27,6 +27,11 @@ public class Staff {
     public Staff() {
     }
 
+    public Staff(String t_ACCOUNT, String t_PASS) {
+        T_ACCOUNT = t_ACCOUNT;
+        T_PASS = t_PASS;
+    }
+
     public Staff(String t_ACCOUNT, String t_PASS, String t_NAME, String t_SEX, Date t_BIRTHDAY, Long t_PHONE, String t_EMAIL, Integer t_AGE, String t_ADDRESS, Integer t_WORKINGSTATE, Integer t_IDPOSITION, Date t_ENTRYTIME) {
         T_ACCOUNT = t_ACCOUNT;
         T_PASS = t_PASS;

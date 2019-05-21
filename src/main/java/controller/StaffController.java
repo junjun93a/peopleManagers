@@ -1,8 +1,10 @@
 package controller;
 
+import model.Department;
 import model.Staff;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import service.DepartmentService;
 import service.StaffService;
 
 import javax.annotation.Resource;
@@ -15,15 +17,23 @@ import java.util.List;
 public class StaffController {
     @Resource
     private StaffService staffService;
-
+    @Resource
+    private DepartmentService departmentService;
 
 
     @RequestMapping("toshowstaff")
-    public String toshowstaff(Integer pid,HttpServletRequest request, HttpSession session, HttpServletResponse resp) {
+    public String toshowstaff(Integer pid,HttpServletRequest request, HttpSession session, HttpServletResponse resp)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
         List<Staff> staff = staffService.selectStaffbyposition(pid);
         session.setAttribute("pstaff",staff);
         return "showstaff";
+
+    }
+    @RequestMapping("tostafflist")
+    public String tostafflist( HttpSession session)throws Exception {
+        List<Department> departments = departmentService.selectAllDepartment();
+        session.setAttribute("alldepartment",departments);
+        return "stafflist";
 
     }
 }

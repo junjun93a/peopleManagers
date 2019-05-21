@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-<a href="/todepartposit">返回</a>
+<a href="todepartposit">返回</a>
 <%
     List<Staff> pstaff = ( List<Staff>)session.getAttribute("pstaff");
     if(pstaff!=null||pstaff.size()!=0){

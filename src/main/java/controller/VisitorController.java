@@ -1,11 +1,13 @@
 package controller;
 
 import model.Admin;
+import model.Staff;
 import model.Visitor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import service.AdminService;
+import service.StaffService;
 import service.VisitorService;
 
 import javax.annotation.Resource;
@@ -22,6 +24,10 @@ public class VisitorController {
     @Resource
     private AdminService adminService;
 
+    @Resource
+    private StaffService staffService;
+
+
     @RequestMapping("loginv")
     public String loginv(String T_ACCOUNT,String T_PASS, String log,HttpSession session, HttpServletResponse resp)throws Exception{
         resp.setContentType("text/html;charset=UTF-8");
@@ -35,8 +41,12 @@ public class VisitorController {
             }
             return "loginview";
         }else if(log.equals("staff")){
-
-
+            Staff staff=new Staff(T_ACCOUNT,T_PASS);
+            Staff staff1 = staffService.selectStaffbyaccountandpass(staff);
+            if(staff1!=null){
+                session.setAttribute("staff",staff1);
+                return "staffview";
+            }
             return "loginview";
         }else if(log.equals("admin")){
             Admin admin=new Admin(T_ACCOUNT,T_PASS);

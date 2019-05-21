@@ -1,8 +1,10 @@
 import dao.StaffDao;
 import model.Staff;
+import model.Visitor;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import service.VisitorService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,5 +32,11 @@ public class test {
        int i= 11111%100;
         System.out.println(i);
     }
-
+    @Test
+    public void test3(){
+        ApplicationContext context= new ClassPathXmlApplicationContext("bean.xml");
+        VisitorService visitorService= (VisitorService) context.getBean("vs");
+        Visitor visitor = visitorService.selectvisitorbyid(2);
+        System.out.println(visitor);
+    }
 }
