@@ -1,18 +1,19 @@
 package model;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Send {
+public class Send  {
     private Integer T_ID;
     private Integer T_IDRECRUIT;
     private Integer T_IDVISITOR;
     private Integer T_IDRESUME;
-    private Integer T_STATE;//0是刚投递，1是投递已读，2是面试通知,3是已面试录取，4是已面试未录用，5放弃面试
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Integer T_STATE;//0是刚投递，1是投递已读，2是面试通知,3是已面试录取，4是已面试未录用，5放弃面试,6参加面试
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     private Date T_TIME;
     private String T_RECRUITDE;
     private String T_RESUMEDE;

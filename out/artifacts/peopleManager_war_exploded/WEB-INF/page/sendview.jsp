@@ -42,6 +42,7 @@
 
 <span class="menu"><a href="tosendview?tree=0">查看所有投递招聘</a></span>
 <span class="menu"><a href="tosendview?tree=1">查看通知面试招聘</a></span>
+<span class="menu"><a href="tosendview?tree=5">查看待面试招聘</a></span>
 <span class="menu"><a href="tosendview?tree=2">查看已录用面试</a></span>
 <span class="menu"><a href="tosendview?tree=3">查看未录用面试</a></span>
 <span class="menu"><a href="tosendview?tree=4">查看已取消面试</a></span>
@@ -74,7 +75,7 @@
             }else if(send.getT_STATE()==2){
 
                 %>
-        <p>招聘状态：待面试</p>
+        <p>招聘状态：待面试通知</p>
         <h4>面试时间：<%=send.getT_TIMES()%></h4>
         <a href="toyes?id=<%=send.getT_ID()%>">参加面试</a>
         <a href="tono?id=<%=send.getT_ID()%>">放弃面试</a>
@@ -94,6 +95,10 @@
             }else if(send.getT_STATE()==5){
         %>
         <p>招聘状态：取消面试</p>
+        <%
+            }else if (send.getT_STATE()==6){
+                %>
+        <p>招聘状态：待面试</p>
         <%
             }
         %>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.AttendanceDao">
+
+    <insert id="insertAttendance">
+insert into P_ATTENDANCE (T_STARTTIME, T_ENDTIME, T_IDSTAFF, T_ERROR,T_DATE)
+VALUES (#{T_STARTTIME,jdbcType=VARCHAR},#{T_ENDTIME,jdbcType=VARCHAR},#{T_IDSTAFF,jdbcType=INTEGER},#{T_ERROR,jdbcType=INTEGER},#{T_DATE,jdbcType=VARCHAR} )
+    </insert>
+    <update id="updateAttendance">
+UPDATE P_ATTENDANCE SET T_STARTTIME=#{T_STARTTIME,jdbcType=VARCHAR}, T_ENDTIME=#{T_ENDTIME,jdbcType=VARCHAR}, T_IDSTAFF=#{T_IDSTAFF,jdbcType=INTEGER}, T_ERROR=#{T_ERROR,jdbcType=INTEGER},T_DATE=#{T_DATE,jdbcType=VARCHAR} WHERE T_ID=#{T_ID}
+    </update>
+    <delete id="deleteAttendance">
+DELETE FROM P_ATTENDANCE WHERE T_ID=#{id}
+    </delete>
+    <select id="selectAllAttendance" resultType="model.Attendance">
+SELECT * FROM P_TRAINDETAIL
+    </select>
+    <select id="selectAllAttendancebystaffid" resultType="model.Attendance">
+SELECT * FROM P_TRAINDETAIL WHERE T_IDSTAFF=#{sid}
+    </select>
+    <select id="selectAttendancebydateandsid" resultType="model.Attendance">
+SELECT * FROM P_ATTENDANCE WHERE T_DATE=#{0} AND T_IDSTAFF=#{1}
+    </select>
+    <select id="selectAttendancebyid" resultType="model.Attendance">
+SELECT * FROM P_ATTENDANCE WHERE T_ID=#{id}
+    </select>
+</mapper>

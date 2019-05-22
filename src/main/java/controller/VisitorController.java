@@ -43,9 +43,9 @@ public class VisitorController {
         }else if(log.equals("staff")){
             Staff staff=new Staff(T_ACCOUNT,T_PASS);
             Staff staff1 = staffService.selectStaffbyaccountandpass(staff);
-            if(staff1!=null){
+            if(staff1!=null&&staff1.getT_WORKINGSTATE()!=2){
                 session.setAttribute("staff",staff1);
-                return "forward：tostaffview";
+                return "forward:tostaffview";
             }
             return "loginview";
         }else if(log.equals("admin")){

@@ -33,7 +33,7 @@
 <span class="menu"><a href="toasendview?tree=0">查看所有投递</a></span>
 <span class="menu"><a href="toasendview?tree=1">查看未读投递</a></span>
 <span class="menu"><a href="toasendview?tree=2">查看已读投递</a></span>
-<span class="menu"><a href="toasendview?tree=3">查看已通知面试投递</a></span>
+<span class="menu"><a href="toasendview?tree=3">查看已参加面试投递</a></span>
 <span class="menu"><a href="toasendview?tree=4">查看已面试投递</a></span>
 <%
     List<Send> sends = (List<Send>)session.getAttribute("asends");
@@ -61,7 +61,7 @@
             if(send.getT_STATE()==0){
         %>
         <p>状态：未读</p>
-        <a href="toreadresume?reid=<%=send.getT_IDRESUME()%>&seid=<%=send.getT_ID()%>">查看简历详情</a>
+        <a href="toreadresume?seid=<%=send.getT_ID()%>">查看简历详情</a>
         <%
         }else if(send.getT_STATE()==1){
 
@@ -76,7 +76,7 @@
                 var upid='timeset'+a
                 $("#"+pppid).click(function () {
                     $("#"+upid).append("<form method=\"post\" action=\"tointerview\">\n" +
-                        "                面试时间：<input type=\"date\" name=\"time\">\n" +
+                        "                面试时间：<input type=\"datetime-local\" name=\"time\">\n" +
                         "                <input type=\"hidden\" value=\"<%=send.getT_ID()%>\" name=\"reid\"> \n" +
                         "                <input type=\"submit\" value=\"发送\">\n" +
                         "            </form>")
@@ -89,10 +89,10 @@
 
         </span>
         <%
-        }else if(send.getT_STATE()==2){
+        }else if(send.getT_STATE()==6){
         %>
         <p>状态：已面试</p>
-        <a href="toyesstaff">录用</a>
+        <a href="toyesstaff?sid=<%=send.getT_ID()%>">录用</a>
         <a href="tonostaff?sid=<%=send.getT_ID()%>">不录用</a>
         <%
         }else if(send.getT_STATE()==5){
@@ -107,6 +107,11 @@
             }else if(send.getT_STATE()==4){
                 %>
         <p>状态：未录用</p>
+        <%
+            }else if(send.getT_STATE()==6){
+                %>
+        <p>状态：待面试</p>
+        <p>约定面试时间：<%=send.getT_TIMES()%></p>
         <%
             }
         %>

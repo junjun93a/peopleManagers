@@ -25,27 +25,69 @@
     </style>
 </head>
 <body>
+
 <a href="todepartposit">返回</a>
 <%
     List<Staff> pstaff = ( List<Staff>)session.getAttribute("pstaff");
-    if(pstaff!=null||pstaff.size()!=0){
+    if(pstaff!=null&&pstaff.size()!=0){
+        int i=0;
         %>
 <ul>
-
 <%
         for (Staff staff : pstaff) {
+            i++;
             %>
     <li><%=staff.toString()%></li>
+
     <%
             if(staff.getT_WORKINGSTATE()==0){
                 %>
     <span>工作状态：试用期</span>
-    <a href="tostaff1">转正</a>
+    <a href="tostaff1?sid=<%=staff.getT_ID()%>">转正</a>
+    <input type="button" value="辞退" id="dimission<%=i%>">
+    <div id="reason<%=i%>">
+    </div>
+    <script src="jq/jquery-3.1.0.js"></script>
+    <script>
+        $(function () {
+            var a=<%=i%>
+            var uppid='dimission'+a
+            var tid='reason'+a
+            $("#"+uppid).click(function () {
+                $('#'+tid).append("  <form action=\"dimissiona\" method=\"post\">\n" +
+                    "        离职原因：<input type=\"text\" name=\"T_REASON\" placeholder=\"请输入原因\">\n" +
+                    "        <input type=\"hidden\" name=\"sid\" value=''\"<%=staff.getT_ID()%>\">\n" +
+                    "        <input type=\"submit\" value=\"提交\">\n" +
+                    "    </form>")
+                $("#"+uppid).attr("disabled","disabled")
+            })
+        })
+    </script>
+
     <%
             }else if (staff.getT_WORKINGSTATE()==1){
 %>
     <span>工作状态：在职</span>
-    <a href="tostaff2">辞退</a>
+    <input type="button" value="辞退" id="dimission<%=i%>">
+    <div id="reason<%=i%>">
+
+    </div>
+    <script>
+        $(function () {
+            var a=<%=i%>
+            var uppid='dimission'+a
+            var tid='reason'+a
+            $("#"+uppid).click(function () {
+                $('#'+tid).append("  <form action=\"dimissiona\" method=\"post\">\n" +
+                    "        离职原因：<input type=\"text\" name=\"T_REASON\" placeholder=\"请输入原因\">\n" +
+                    "        <input type=\"hidden\" name=\"sid\" value=''\"<%=staff.getT_ID()%>\">\n" +
+                    "        <input type=\"submit\" value=\"提交\">\n" +
+                    "    </form>")
+                $("#"+uppid).attr("disabled","disabled")
+            })
+        })
+    </script>
+
     <%
             }else if(staff.getT_WORKINGSTATE()==2){
 %>

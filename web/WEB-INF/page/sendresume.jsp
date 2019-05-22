@@ -54,7 +54,7 @@
 
 <br>
 <hr>
-<a href="/toasendview">返回</a>
+<a href="toasendview">返回</a>
 
 </body>
 </html>

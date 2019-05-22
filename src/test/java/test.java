@@ -37,6 +37,7 @@ public class test {
         ApplicationContext context= new ClassPathXmlApplicationContext("bean.xml");
         VisitorService visitorService= (VisitorService) context.getBean("vs");
         Visitor visitor = visitorService.selectvisitorbyid(2);
+
         System.out.println(visitor);
     }
 }

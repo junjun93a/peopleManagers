@@ -47,10 +47,14 @@ public class SendServiceImpl implements SendService {
         if (seid==null||seid==0||state==null||state==0){
             return false;
         }
-        Send send = selectSendbyid(seid);
-        send.setT_STATE(1);
-        boolean b = updateSend(send);
-        return b;
+        Send send = sendDao.selectSendbyid(seid);
+        send.setT_STATE(state);
+        Integer i = sendDao.updateSend(send);
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override

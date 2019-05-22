@@ -213,4 +213,25 @@ public class Staff {
                 ", 入职时间='" + T_ENTRYTIME + '\'' +
                 '}';
     }
+
+
+    public String toStringte() {
+        return "Staff{" +
+                "T_ID=" + T_ID +
+                ", T_ACCOUNT='" + T_ACCOUNT + '\'' +
+                ", T_PASS='" + T_PASS + '\'' +
+                ", T_NAME='" + T_NAME + '\'' +
+                ", T_SEX='" + T_SEX + '\'' +
+                ", T_BIRTHDAY=" + T_BIRTHDAY +
+                ", T_PHONE=" + T_PHONE +
+                ", T_EMAIL='" + T_EMAIL + '\'' +
+                ", T_AGE=" + T_AGE +
+                ", T_ADDRESS='" + T_ADDRESS + '\'' +
+                ", T_IMAGE='" + T_IMAGE + '\'' +
+                ", T_WORKINGSTATE=" + T_WORKINGSTATE +
+                ", T_REASON='" + T_REASON + '\'' +
+                ", T_IDPOSITION=" + T_IDPOSITION +
+                ", T_ENTRYTIME=" + T_ENTRYTIME +
+                '}';
+    }
 }

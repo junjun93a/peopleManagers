@@ -6,7 +6,7 @@
 
     <insert id="insertStaff">
         insert into P_STAFF ( T_ACCOUNT, T_PASS, T_NAME, T_SEX, T_BIRTHDAY, T_PHONE, T_EMAIL, T_AGE, T_ADDRESS, T_IMAGE, T_WORKINGSTATE, T_REASON, T_IDPOSITION,T_ENTRYTIME)
-        VALUES (#{T_ACCOUNT}, #{T_PASS}, #{T_NAME}, #{T_SEX}, #{T_BIRTHDAY}, #{T_PHONE},#{T_EMAIL} , #{T_AGE}, #{T_ADDRESS}, #{T_IMAGE}, #{T_WORKINGSTATE}, #{T_REASON}, #{T_IDPOSITION},#{T_ENTRYTIME})
+        VALUES (#{T_ACCOUNT}, #{T_PASS}, #{T_NAME}, #{T_SEX}, #{T_BIRTHDAY}, #{T_PHONE},#{T_EMAIL} , #{T_AGE}, #{T_ADDRESS}, #{T_IMAGE, jdbcType=VARCHAR}, #{T_WORKINGSTATE}, #{T_REASON,jdbcType=VARCHAR}, #{T_IDPOSITION},#{T_ENTRYTIME})
     </insert>
     <update id="updateStaff">
         UPDATE P_STAFF SET T_ACCOUNT=#{T_ACCOUNT}, T_PASS=#{T_PASS}, T_NAME=#{T_NAME}, T_SEX=#{T_SEX}, T_BIRTHDAY=#{T_BIRTHDAY}, T_PHONE=#{T_PHONE}, T_EMAIL=#{T_EMAIL}, T_AGE=#{T_AGE}, T_ADDRESS=#{T_ADDRESS}, T_IMAGE=#{T_IMAGE}, T_WORKINGSTATE=#{T_WORKINGSTATE}, T_REASON=#{T_REASON}, T_IDPOSITION=#{T_IDPOSITION} WHERE T_ID=#{T_ID}
@@ -21,7 +21,7 @@
         SELECT * FROM P_STAFF WHERE T_ACCOUNT=#{T_ACCOUNT} AND T_PASS=#{T_PASS}
     </select>
     <select id="selectStaffbyposition" resultType="model.Staff">
-        SELECT * FROM P_STAFF WHERE T_IDPOSITION=#{pid} and T_WORKINGSTATE=1
+        SELECT * FROM P_STAFF WHERE T_IDPOSITION=#{pid} and T_WORKINGSTATE in (0,1)
     </select>
     <select id="selectStaffbydepartmentid" resultType="model.Staff">
          SELECT * FROM P_STAFF WHERE T_IDPOSITION in (select T_ID FROM  P_POSITION WHERE T_IDDEPARTMENT=#{did}) and T_WORKINGSTATE=1

@@ -22,7 +22,7 @@
 %>
 <h3>欢迎您，<%=admin.getT_ACCOUNT()%></h3>
 <a href="toasendview">查看投递信息</a>
-<a href="todepartposit">部门职位管理</a>
+<a href="todepartposit">部门职位与员工管理</a>
 <a href="toarecruit">管理招聘信息</a>
 <a href="toatrainingview">培训信息管理</a>
 <a href="logout">退出</a>

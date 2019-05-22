@@ -55,7 +55,7 @@
     %>
     <li>
         <div>
-            <h3>部门<%=department.getT_NAME()%> —— 职位<%=position.getT_NAME()%> </h3>
+            <h3>部门：<%=department.getT_NAME()%> —— 职位：<%=position.getT_NAME()%> </h3>
             <p><span><%=recruit.getT_MONEY()%>元</span>
                 <span><%=recruit.getT_CITY()%></span>
                 <span><%=recruit.getT_EDUCATION()%></span>

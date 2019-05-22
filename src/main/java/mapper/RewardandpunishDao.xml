@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.RewardandpunishDao">
+
+    <insert id="insertRewardandpunish">
+        insert into P_REWARDANDPUNISH ( T_TIME, T_REASON, T_MONEY, T_IDSTAFF)
+        VALUES (#{T_TIME,jdbcType=VARCHAR},#{T_REASON,jdbcType=VARCHAR},#{T_MONEY,jdbcType=INTEGER},#{T_IDSTAFF,jdbcType=INTEGER})
+    </insert>
+    <update id="updateRewardandpunish">
+        UPDATE P_REWARDANDPUNISH SET T_TIME=#{T_TIME,jdbcType=VARCHAR}, T_REASON=#{T_REASON,jdbcType=VARCHAR}, T_MONEY=#{T_MONEY,jdbcType=INTEGER}, T_IDSTAFF=#{T_IDSTAFF,jdbcType=INTEGER} WHERE T_ID=#{T_ID}
+    </update>
+    <delete id="deleteRewardandpunish">
+        DELETE FROM P_REWARDANDPUNISH WHERE T_ID=#{T_ID}
+    </delete>
+    <select id="selectRewardandpunishbysid" resultType="model.Rewardandpunish">
+        SELECT * FROM P_REWARDANDPUNISH WHERE T_IDSTAFF=#{sid}
+    </select>
+    <select id="selectRewardandpunishbyid" resultType="model.Rewardandpunish">
+        SELECT * FROM P_REWARDANDPUNISH WHERE T_ID=#{id}
+    </select>
+    <select id="selectRewardandpunishbysidanddate" resultType="model.Rewardandpunish">
+        select * from P_REWARDANDPUNISH where T_IDSTAFF=#{0} and T_TIME=#{1}
+    </select>
+</mapper>

@@ -27,6 +27,7 @@ public class StaffServiceImpl implements StaffService {
         Staff staff1 = staffDao.selectStaffbyaccountandpass(staff);
         Send send = sendDao.selectSendbyid(sid);
         send.setT_IDSTAFF(staff1.getT_ID());
+        send.setT_STATE(3);
         Integer i = sendDao.updateSend(send);
         if(i!=0){
             return true;

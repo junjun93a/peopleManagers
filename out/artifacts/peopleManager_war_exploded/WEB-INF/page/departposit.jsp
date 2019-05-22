@@ -38,7 +38,7 @@
     List<Position> positions =( List<Position>) session.getAttribute("positions");
     List<Department> departments =(List<Department>) session.getAttribute("departments");
 %>
-
+<a href="toadmin">返回</a>
 <input type="button" value="新增部门" id="adddepart">
 <script src="jq/jquery-3.1.0.js"></script>
 <script>
@@ -115,54 +115,56 @@
                         })
                     })
                 </script>
-                <h4>职位:</h4>
-                <%
+                <span>
+                    <h4>职位:</h4>
+                     <%
                 if(positions!=null&&positions.size()!=0){
                     int j=0;
-                    %>
-                <ul >
-                <%
+%>
+                   <ul>
+                    <%
                         for (Position position : positions) {
 
                             if(position.getT_IDDEPARTMENT()==department.getT_ID()){
                                 j++;
                             %>
-                    <li class="position">
-                        <span><%=position.getT_NAME()%></span>
-                        <a href="deleteposition?pid=<%=position.getT_ID()%>">删除职位</a>
-                        <input type="button" value="修改职位" id="updateposition<%=j%>">
-                        <div id="upposit<%=j%>"></div>
-                        <script>
-                            $(function () {
-                                var a=<%=j%>
-                                var uppid='updateposition'+a
-                                var tid='upposit'+a
-                                $("#"+uppid).click(function () {
-                                    $('#'+tid).append("<form action=\"updateposition\" method=\"post\">\n" +
-                                        "    职位名称：<input name=\"T_NAME\" type=\"text\"><br>\n" +
-                                        "    <input type=\"hidden\" value=\"<%=position.getT_ID()%>\" name=\"pid\">\n" +
-                                        "    <input type=\"hidden\" value=\"<%=department.getT_ID()%>\" name=\"did\">\n" +
-                                        "    <input type=\"submit\" value=\"修改\">\n" +
-                                        "</form>")
-                                    $("#"+uppid).attr("disabled","disabled")
-                                })
-                            })
-                        </script>
+    <li class="position">
+        <span><%=position.getT_NAME()%></span>
+        <a href="deleteposition?pid=<%=position.getT_ID()%>">删除职位</a>
+        <input type="button" value="修改职位" id="updateposition<%=j%>">
+        <div id="upposit<%=j%>"></div>
+        <script>
+            $(function () {
+                var a=<%=j%>
+                var uppid='updateposition'+a
+                var tid='upposit'+a
+                $("#"+uppid).click(function () {
+                    $('#'+tid).append("<form action=\"updateposition\" method=\"post\">\n" +
+                        "    职位名称：<input name=\"T_NAME\" type=\"text\"><br>\n" +
+                        "    <input type=\"hidden\" value=\"<%=position.getT_ID()%>\" name=\"pid\">\n" +
+                        "    <input type=\"hidden\" value=\"<%=department.getT_ID()%>\" name=\"did\">\n" +
+                        "    <input type=\"submit\" value=\"修改\">\n" +
+                        "</form>")
+                    $("#"+uppid).attr("disabled","disabled")
+                })
+            })
+        </script>
 
-                        <a href="toshowstaff?pid=<%=position.getT_ID()%>">查询对应员工</a>
-                    </li>
-                    <%
-                            }
-                        }
-                    %>
-                </ul>
-                    <%
-                }else {
-                    %>
-                h3>暂无职位</h3>
-                <%
-                }
-                %>
+        <a href="toshowstaff?pid=<%=position.getT_ID()%>">查询对应员工</a>
+    </li>
+    <%
+            }
+        }
+        %>
+                   </ul>
+                        <%
+
+    }else {
+        }
+    %>
+                </span>
+
+
             </li>
 <%
         }

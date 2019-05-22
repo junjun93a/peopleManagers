@@ -40,7 +40,7 @@
                 $("#addPosit .post").remove();
                 $("#addstaff .staff").remove();
                 for(var i in obj){
-                    $("#addPosit").append("<option class='post' value='"+obj[i]['T_ID']+"'>"+obj[i]['T_NAME']+"</option>")
+                    $("#addPosit").append("<option class='post' value='"+obj[i]['t_ID']+"'>"+obj[i]['t_NAME']+"</option>")
                 }
             })
         })
@@ -48,7 +48,7 @@
             $.post("selectstaffbypidt",{"pid":$(this).val()},function (obj) {
                 $("#addstaff option").remove();
                 for(var i in obj){
-                    $("#addstaff").append("<option class='staff' value='"+obj[i]['T_ID']+"'>"+obj[i]['T_NAME']+"</option>")
+                    $("#addstaff").append("<option class='staff' value='"+obj[i]['t_ID']+"'>"+obj[i]['t_NAME']+"</option>")
                 }
             })
         })
