@@ -101,4 +101,9 @@ public class StaffServiceImpl implements StaffService {
         }
         return staffDao.selectStaffbydepartmentid(did);
     }
+
+    @Override
+    public List<Staff> selectAllStaff() {
+        return staffDao.selectAllStaff();
+    }
 }

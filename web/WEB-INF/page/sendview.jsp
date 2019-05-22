@@ -89,17 +89,15 @@
         <%
             }else if (send.getT_STATE()==4){
                 %>
-
+        <p>招聘状态：未录取</p>
         <%
             }else if(send.getT_STATE()==5){
         %>
-
         <p>招聘状态：取消面试</p>
         <%
             }
         %>
     </li>
-
 <%
         }
         %>

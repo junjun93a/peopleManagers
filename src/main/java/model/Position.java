@@ -6,6 +6,10 @@ public class Position {
     private  String T_NAME;
     private Integer T_IDDEPARTMENT;
 
+
+    public Position() {
+    }
+
     public Position(String t_NAME, Integer t_IDDEPARTMENT) {
         T_NAME = t_NAME;
         T_IDDEPARTMENT = t_IDDEPARTMENT;

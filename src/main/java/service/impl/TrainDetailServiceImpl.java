@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.TrainDetailDao;
+import model.Staff;
 import model.TrainDetail;
 import model.Training;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,22 @@ public class TrainDetailServiceImpl implements TrainDetailService {
     }
 
     @Override
+    public boolean insertTraindetailbypositions(List<Staff> staffs,Integer tid) {
+        if(staffs!=null&&staffs.size()!=0){
+            return false;
+        }
+        Integer i =0;
+        for (Staff staff : staffs) {
+             i = trainDetailDao.insertTraindetail(new TrainDetail(staff.getT_ID(),tid));
+        }
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
     public boolean updateTraindetail(TrainDetail traindetail) {
         if (traindetail==null){
             return false;
@@ -52,6 +69,19 @@ public class TrainDetailServiceImpl implements TrainDetailService {
         }
         Integer i = trainDetailDao.deleteTraindetail(id);
 
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteTraindetailbystaff(Integer sid) {
+        if (sid==null||sid==0){
+            return false;
+        }
+        Integer i = trainDetailDao.deleteTraindetailbystaff(sid);
         if(i!=0){
             return true;
         }else {

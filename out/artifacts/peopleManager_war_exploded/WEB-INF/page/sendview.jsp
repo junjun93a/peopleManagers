@@ -6,7 +6,11 @@
 <%@ page import="service.RecruitService" %>
 <%@ page import="service.impl.RecruitServiceImpl" %>
 <%@ page import="service.ResumeService" %>
-<%@ page import="service.impl.ResumeServiceImpl" %><%--
+<%@ page import="service.impl.ResumeServiceImpl" %>
+<%@ page import="org.springframework.context.ApplicationContext" %>
+<%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
+<%@ page import="dao.StaffDao" %>
+<%@ page import="model.Staff" %><%--
   Created by IntelliJ IDEA.
   User: hasee
   Date: 2019/5/16
@@ -75,19 +79,25 @@
         <a href="toyes?id=<%=send.getT_ID()%>">参加面试</a>
         <a href="tono?id=<%=send.getT_ID()%>">放弃面试</a>
         <%
-            }else if(send.getT_STATE()==3||send.getT_STATE()==4){
+            }else if(send.getT_STATE()==3){
+                ApplicationContext context= new ClassPathXmlApplicationContext("bean.xml");
+                StaffDao staffDao= (StaffDao) context.getBean("staffDao");
+                Staff staff = staffDao.selectStaffbyid(send.getT_IDSTAFF());
         %>
-        <p>招聘状态：已面试</p>
+        <p>招聘状态：录取</p>
+        <span><%=staff.toStringap()%></span>
+        <%
+            }else if (send.getT_STATE()==4){
+                %>
+        <p>招聘状态：未录取</p>
         <%
             }else if(send.getT_STATE()==5){
         %>
-
         <p>招聘状态：取消面试</p>
         <%
             }
         %>
     </li>
-
 <%
         }
         %>

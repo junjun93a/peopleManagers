@@ -1,16 +1,11 @@
 package controller;
 
-import model.Department;
-import model.Staff;
-import model.TrainDetail;
-import model.Training;
+import model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import service.DepartmentService;
-import service.RecruitService;
-import service.TrainDetailService;
-import service.TrainingService;
+import org.springframework.web.bind.annotation.ResponseBody;
+import service.*;
 import utils.CurrentPage;
 import utils.GetTotalPage;
 
@@ -29,6 +24,10 @@ public class TrainingController {
     private TrainingService trainingService;
     @Resource
     private DepartmentService departmentService;
+    @Resource
+    private PositionService positionService;
+    @Resource
+    private StaffService staffService;
 
     @RequestMapping("totrainingview")
     public String totrainingview(@RequestParam(name = "currentPage",required = false)Integer currentPage, HttpServletRequest request, HttpSession session, HttpServletResponse resp)throws Exception {
@@ -109,13 +108,93 @@ public class TrainingController {
     }
 
     @RequestMapping("tochoicepeople")
-    public void tochoicepeople(HttpServletRequest req,HttpSession session, HttpServletResponse resp)throws Exception {
+    public String tochoicepeople(HttpServletRequest req,HttpSession session, HttpServletResponse resp,Integer tid)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
         List<Department> departments = departmentService.selectAllDepartment();
         session.setAttribute("chdepartment",departments);
-        req.getRequestDispatcher("/WEB-INF/page/choicepeople.jsp").forward(req,resp);
+        List<TrainDetail> trainDetails = trainDetailService.selectTraindetailbyTraining(tid);
+        List<Staff> staffs=new ArrayList<>();
+        for (TrainDetail trainDetail : trainDetails) {
+            Staff staff = staffService.selectStaffbyid(trainDetail.getT_IDSTAFF());
+            staffs.add(staff);
+        }
+        session.setAttribute("trainingid",tid);
+        session.setAttribute("tstaffs",staffs);
+        return "choicepeople";
+
     }
 
+    @RequestMapping("deletetstaff")
+    public void deletetstaff(HttpServletRequest req,HttpSession session, HttpServletResponse resp,Integer sid)throws Exception {
+        resp.setContentType("text/html;charset=UTF-8");
+        if(trainDetailService.deleteTraindetailbystaff(sid)){
+            resp.getWriter().write("<script>alert(\"删除成功\");window.location.href='tochoicepeople';</script>");
+        }else {
+            resp.getWriter().write("<script>alert(\"删除失败\");window.location.href='tochoicepeople';</script>");
+        }
+
+    }
+
+    @RequestMapping("addstaff")
+    public void addstaff(Integer T_DEPARTMENT,Integer T_POSITION,Integer T_STAFF,HttpServletRequest req,HttpSession session, HttpServletResponse resp)throws Exception {
+        resp.setContentType("text/html;charset=UTF-8");
+        Integer trainingid =(Integer) session.getAttribute("trainingid");
+        if(T_STAFF!=null){
+            Staff staff = staffService.selectStaffbyid(T_STAFF);
+            if(trainDetailService.insertTraindetail(new TrainDetail(staff.getT_ID(),trainingid))){
+                resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='tochoicepeople';</script>");
+            }else {
+                resp.getWriter().write("<script>alert(\"添加失败\");window.location.href='tochoicepeople';</script>");
+            }
+        }else if (T_POSITION!=null&&T_STAFF==null){
+            List<Staff> staffs = staffService.selectStaffbyposition(T_POSITION);
+            if(staffs!=null&&staffs.size()!=0){
+               if(trainDetailService.insertTraindetailbypositions(staffs,trainingid)) {
+                   resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='tochoicepeople';</script>");
+               }else {
+                   resp.getWriter().write("<script>alert(\"添加失败\");window.location.href='tochoicepeople';</script>");
+               }
+            }else {
+                resp.getWriter().write("<script>alert(\"无对应员工\");window.location.href='tochoicepeople';</script>");
+            }
+        }else if(T_DEPARTMENT!=null&&T_POSITION==null){
+            List<Position> positions = positionService.selectPositionbydid(T_DEPARTMENT);
+            List<Staff> staffs = staffService.selectStaffbydepartmentid(T_DEPARTMENT);
+            if(staffs!=null&&staffs.size()!=0){
+                if(trainDetailService.insertTraindetailbypositions(staffs,trainingid)) {
+                    resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='tochoicepeople';</script>");
+                }else {
+                    resp.getWriter().write("<script>alert(\"添加失败\");window.location.href='tochoicepeople';</script>");
+                }
+            }else {
+                resp.getWriter().write("<script>alert(\"无对应员工\");window.location.href='tochoicepeople';</script>");
+            }
+        }else if (T_DEPARTMENT==null){
+            List<Staff> staffs = staffService.selectAllStaff();
+            if(staffs!=null&&staffs.size()!=0){
+                if(trainDetailService.insertTraindetailbypositions(staffs,trainingid)) {
+                    resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='tochoicepeople';</script>");
+                }else {
+                    resp.getWriter().write("<script>alert(\"添加失败\");window.location.href='tochoicepeople';</script>");
+                }
+            }else {
+                resp.getWriter().write("<script>alert(\"无对应员工\");window.location.href='tochoicepeople';</script>");
+            }
+        }
+    }
+
+
+    @RequestMapping("selectpositbydidt")
+    @ResponseBody
+    public List<Position> selectpositbydidt(Integer did){
+        return  positionService.selectPositionbydid(did);
+    }
+
+    @RequestMapping("selectstaffbypidt")
+    @ResponseBody
+    public List<Staff> selectstaffbypidt(Integer pid){
+        return staffService.selectStaffbyposition(pid);
+    }
 
 
     @RequestMapping("trainlaunch")

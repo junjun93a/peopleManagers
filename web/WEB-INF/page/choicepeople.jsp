@@ -5,7 +5,8 @@
 <%@ page import="dao.PositionDao" %>
 <%@ page import="model.Department" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Position" %><%--
+<%@ page import="model.Position" %>
+<%@ page import="model.Staff" %><%--
   Created by IntelliJ IDEA.
   User: hasee
   Date: 2019/5/21
@@ -24,35 +25,9 @@
 </head>
 <body>
 
-<a href="/toatrainingview">返回</a>
+<a href="toatrainingview">返回</a>
 <br>
 <hr>
-
-<%--<%--%>
-    <%--ApplicationContext context= new ClassPathXmlApplicationContext("bean.xml");--%>
-    <%--StaffDao staffDao= (StaffDao) context.getBean("staffDao");--%>
-    <%--DepartmentDao departmentDao=(DepartmentDao) context.getBean("departmentDao");--%>
-    <%--PositionDao positionDao=(PositionDao)context.getBean("positionDao");--%>
-
-
-    <%--List<Department> departments = departmentDao.selectAllDepartment();--%>
-    <%--if(departments!=null||departments.size()==0){--%>
-        <%--for (Department department : departments) {--%>
-            <%--//显示+超链接，加人要判断唯一--%>
-            <%--List<Position> positions = positionDao.selectPositionbydid(department.getT_ID());--%>
-            <%--if(positions!=null||positions.size()==0){--%>
-                <%--for (Position position : positions) {--%>
-
-                <%--}--%>
-                <%--//显示+超链接，加人要判断唯一--%>
-            <%--}else {--%>
-                <%--//无职位--%>
-            <%--}--%>
-        <%--}--%>
-    <%--}else {--%>
-        <%--//无部门--%>
-    <%--}--%>
-<%--%>--%>
 
 <%
     List<Department> departments =(List<Department>)session.getAttribute("chdepartment");
@@ -60,14 +35,24 @@
 <script src="jq/jquery-3.1.0.js"></script>
 <script>
     $(function () {
-        $("#updateDep").change(function () {
-            $.post("selectpositbydid",{"did":$(this).val()},function (obj) {
-                $("#updatePosit option").remove();
+        $("#addDep").change(function () {
+            $.post("selectpositbydidt",{"did":$(this).val()},function (obj) {
+                $("#addPosit .post").remove();
+                $("#addstaff .staff").remove();
                 for(var i in obj){
-                    $("#updatePosit").append("<option value='"+obj[i]['T_ID']+"'>"+obj[i]['T_NAME']+"</option>")
+                    $("#addPosit").append("<option class='post' value='"+obj[i]['T_ID']+"'>"+obj[i]['T_NAME']+"</option>")
                 }
             })
         })
+        $("#addPosit").change(function () {
+            $.post("selectstaffbypidt",{"pid":$(this).val()},function (obj) {
+                $("#addstaff option").remove();
+                for(var i in obj){
+                    $("#addstaff").append("<option class='staff' value='"+obj[i]['T_ID']+"'>"+obj[i]['T_NAME']+"</option>")
+                }
+            })
+        })
+
     })
 </script>
 
@@ -86,17 +71,40 @@
         %>
     </select>
 
-        职位：<select id="addPosit" name="T_POSITION"></select>
-        员工： <select id="addstaff" name="T_STAFF"></select><br>
+        职位：<select id="addPosit" name="T_POSITION">
+        <option hidden>请选择﹀</option>
+    </select>
+        员工： <select id="addstaff" name="T_STAFF">
+        <option hidden>请选择﹀</option>
+    </select><br>
+        <input type="submit" value="添加">
     </form>
 </div>
 
-
+<div>
 
 <%
-    String tid=request.getParameter("tid");
+    List<Staff> tstaffs = (List<Staff>) session.getAttribute("tstaffs");
+if(tstaffs!=null||tstaffs.size()!=0){
+    %>
+
+    <h3>已添加人：</h3>
+<%
+    for (Staff staff : tstaffs) {
+        %>
+    <p><%=staff.getT_NAME()%><a href="deletetstaff?sid=<%=staff.getT_ID()%>">删除</a></p>
+    <%
+    }
+    %>
+
+    <%
+}else {
+    %>
+    <h2>暂无人员</h2>
+    <%
+}
 %>
-<div>放已选人</div>
+</div>
 
 </body>
 </html>

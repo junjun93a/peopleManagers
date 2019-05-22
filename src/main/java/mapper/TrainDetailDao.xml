@@ -13,6 +13,9 @@
     <delete id="deleteTraindetail">
         DELETE FROM P_TRAINDETAIL WHERE T_ID=#{id}
     </delete>
+    <delete id="deleteTraindetailbystaff">
+        DELETE FROM P_TRAINDETAIL WHERE T_IDSTAFF=#{sid}
+    </delete>
     <select id="selectTraindetailById" resultType="model.TrainDetail">
         SELECT * FROM P_TRAINDETAIL WHERE T_ID=#{id}
     </select>

@@ -18,6 +18,8 @@ public class Department {
         T_TIME = t_TIME;
     }
 
+    public Department() {
+    }
 
     public Integer getT_ID() {
         return T_ID;

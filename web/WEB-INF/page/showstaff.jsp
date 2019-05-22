@@ -40,10 +40,12 @@
             if(staff.getT_WORKINGSTATE()==0){
                 %>
     <span>工作状态：试用期</span>
+    <a href="tostaff1">转正</a>
     <%
             }else if (staff.getT_WORKINGSTATE()==1){
 %>
     <span>工作状态：在职</span>
+    <a href="tostaff2">辞退</a>
     <%
             }else if(staff.getT_WORKINGSTATE()==2){
 %>

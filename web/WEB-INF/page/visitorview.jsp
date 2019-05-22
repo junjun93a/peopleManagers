@@ -30,6 +30,7 @@
 
 %>
 <h3>欢迎您，<%=visitor.getT_NAME()%></h3>
+<a href="logout">退出</a>
 <a href="toresumeview">我的简历</a>
 <a href="tosendview">我的面试通知</a>
 <a href="tovrecruit">查看招聘信息</a>

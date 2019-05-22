@@ -1,7 +1,13 @@
 <%@ page import="service.RecruitService" %>
 <%@ page import="service.impl.RecruitServiceImpl" %>
 <%@ page import="model.Recruit" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="org.springframework.context.ApplicationContext" %>
+<%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
+<%@ page import="dao.PositionDao" %>
+<%@ page import="dao.DepartmentDao" %>
+<%@ page import="model.Position" %>
+<%@ page import="model.Department" %><%--
   Created by IntelliJ IDEA.
   User: hasee
   Date: 2019/5/14
@@ -46,15 +52,20 @@
 <%
     List<Recruit> recruitlist =(List<Recruit>) session.getAttribute("recruitlist");
     if(recruitlist!=null&&recruitlist.size()!=0){
+        ApplicationContext context= new ClassPathXmlApplicationContext("bean.xml");
+        PositionDao positionDao= (PositionDao) context.getBean("positionDao");
+        DepartmentDao departmentDao= (DepartmentDao) context.getBean("departmentDao");
         %>
 <ul>
     <%
         for (Recruit recruit : recruitlist) {
+            Position position = positionDao.selectPositionbyid(recruit.getT_POSITION());
+            Department department = departmentDao.selectDepartmentbyid(position.getT_IDDEPARTMENT());
             %>
 
     <li>
         <div>
-            <h3><a href=""><%=recruit.getT_POSITION()%></a> </h3>
+            <h3>部门<%=department.getT_NAME()%> —— 职位<%=position.getT_NAME()%> </a> </h3>
             <p><span><%=recruit.getT_MONEY()%>元</span>
                 <span><%=recruit.getT_CITY()%></span>
                 <span><%=recruit.getT_EDUCATION()%></span>

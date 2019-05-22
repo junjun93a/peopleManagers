@@ -14,4 +14,5 @@ public interface StaffDao {
     List<Staff> selectStaffbyallposition(Integer pid);
     List<Staff> selectStaffbyposition(Integer pid);
     List<Staff> selectStaffbydepartmentid(Integer did);
+    List<Staff> selectAllStaff();
 }
