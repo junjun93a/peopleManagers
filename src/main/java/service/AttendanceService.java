@@ -13,4 +13,5 @@ public interface AttendanceService {
     Attendance selectAttendancebydateandsid(String date,Integer sid);
     Attendance selectAttendancebyid(Integer id);
     List<Attendance> selectAttendancebymonthandsid(String month,Integer sid);
+    List<Attendance> selectAttendancebymonthandmanysid(String month,List<Integer> sids);
 }

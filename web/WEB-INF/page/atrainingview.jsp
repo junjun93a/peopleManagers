@@ -28,8 +28,8 @@
         $('#addtrain').click(function () {
             $("#addtrainform").append("<form action=\"addatrain\" method=\"post\">\n" +
                 "    培训标题：<input type=\"text\" name=\"T_TITLE\"><br>\n" +
-                "    开始时间：<input type=\"date\" name=\"T_STARTTIME\"><br>\n" +
-                "    结束时间：<input type=\"date\" name=\"T_ENDTIME\"><br>\n" +
+                "    开始时间：<input type=\"datetime-local\" name=\"T_STARTTIME\"><br>\n" +
+                "    结束时间：<input type=\"datetime-local\" name=\"T_ENDTIME\"><br>\n" +
                 "    培训地点：<input type=\"text\" name=\"T_ADDRESS\"><br>\n" +
                 "    培训内容：<input type=\"text\" name=\"T_DETAIL\"><br>\n" +
                 "    <input type=\"submit\" value=\"新增\">\n" +
@@ -41,6 +41,7 @@
 <div id="addtrainform"></div>
 <br>
 <hr>
+
 <%
         List<Training> trainings =(List<Training>) session.getAttribute("atrainings");
         if(trainings!=null&&trainings.size()!=0){
@@ -87,8 +88,8 @@
                     "        <input type=\"hidden\" value=\"<%=training.getT_ID()%>\" name=\"T_ID\">\n" +
                     "        培训标题：<input type=\"text\" name=\"T_TITLE\" value=\"<%=training.getT_TITLE()%>\"><br>\n" +
                     "        培训内容：<input type=\"text\" name=\"T_DETAIL\" value=\"<%=training.getT_DETAIL()%>\"><br>\n" +
-                    "        开始时间：<input type=\"date\" name=\"T_STARTTIME\" value=\"<%=training.getT_STARTTIME()%>\"><br>\n" +
-                    "        结束时间：<input type=\"date\" name=\"T_ENDTIME\" value=\"<%=training.getT_ENDTIME()%>\"><br>\n" +
+                    "        开始时间：<input type=\"datetime-local\" name=\"T_STARTTIME\" value=\"<%=training.getT_STARTTIME()%>\"><br>\n" +
+                    "        结束时间：<input type=\"datetime-local\" name=\"T_ENDTIME\" value=\"<%=training.getT_ENDTIME()%>\"><br>\n" +
                     "        培训地点：<input type=\"text\" name=\"T_ADDRESS\" value=\"<%=training.getT_ADDRESS()%>\"><br>\n" +
                     "        <input type=\"submit\" value=\"修改\">\n" +
                     "    </form>")

@@ -10,10 +10,7 @@ import service.VisitorService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class test {
 
@@ -117,7 +114,7 @@ public class test {
     @Test
     public void test9()throws Exception {
         String yeart="2019";
-        Integer montht=5;
+        Integer montht=4;
         String m=null;
         if(montht>9){
             m= String.valueOf(montht);
@@ -137,6 +134,48 @@ public class test {
         System.out.println(attendance.size());
 
     }
+    @Test
+    public void test10()throws Exception {
+            List<String> list = new ArrayList<>();
+            Calendar aCalendar = Calendar.getInstance(Locale.CHINA);
+            int year = aCalendar.get(Calendar.YEAR);//年份
+            int month = aCalendar.get(Calendar.MONTH) + 1;//月份
+            int day = aCalendar.getActualMaximum(Calendar.DATE);
+            for (int i = 1; i <= day; i++) {
+                String aDate = String.valueOf(year)+"-"+month+"-"+i;
+                DateFormat date1=new SimpleDateFormat("yyyy-MM-dd");
+                Date weekday = date1.parse(aDate);
+                if(weekday.getDay()!=0&&weekday.getDay()!=6){
+                    list.add(aDate);
+                }
 
+            }
+            System.out.println(list);
+    }
+    @Test
+    public void test11()throws Exception {
+        List<String> list = new ArrayList<>();
+        Date date=new Date();
+        DateFormat month=new SimpleDateFormat("yyyy-MM");
+        String ym = month.format(date);
+        DateFormat day=new SimpleDateFormat("dd");
+        Integer dd = Integer.valueOf(day.format(date));
+        String m=null;
+        for (int i =1; i<dd; i++) {
+            if(i>9){
+                m= String.valueOf(i);
+            }else {
+                m="0"+i;
+            }
+            String aDate =ym+"-"+m;
+
+            DateFormat date1=new SimpleDateFormat("yyyy-MM-dd");
+            Date weekday = date1.parse(aDate);
+            if(weekday.getDay()!=0&&weekday.getDay()!=6){
+                list.add(aDate);
+            }
+        }
+        System.out.println(list);
+    }
 
 }

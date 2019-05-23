@@ -26,7 +26,7 @@
 <a href="toarecruit">管理招聘信息</a>
 <a href="toatrainingview">培训信息管理</a>
 <a href="">查看奖惩信息</a>
-<a href="">查看考勤信息</a>
+<a href="toashowattendance">查看考勤信息</a>
 <a href="logout">退出</a>
 </body>
 </html>

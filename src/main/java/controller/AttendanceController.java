@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -90,7 +91,7 @@ public class AttendanceController {
         Attendance attendance1 = attendanceService.selectAttendancebydateandsid(T_DATE, staff.getT_ID());
         if(attendance1==null){
             Integer error=0;
-            if(day==0|day==1){
+            if(day==0|day==6){
                 error=4;//加班
 
             }else {
@@ -162,7 +163,7 @@ public class AttendanceController {
 
 
     @RequestMapping("toshowattendance")
-    public String toshowattendance(HttpServletRequest request, HttpSession session, HttpServletResponse resp) {
+    public String toshowattendance(HttpServletRequest request, HttpSession session, HttpServletResponse resp)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
         return "showattendance";
     }
@@ -171,7 +172,7 @@ public class AttendanceController {
 
 
     @RequestMapping("selectattendance")
-    public String selectattendance(String yeart,Integer montht,HttpServletRequest request, HttpSession session, HttpServletResponse resp) {
+    public String selectattendance(String yeart,Integer montht,HttpServletRequest request, HttpSession session, HttpServletResponse resp)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
         String m=null;
          if(montht>9){
@@ -188,7 +189,7 @@ public class AttendanceController {
     }
 
     @RequestMapping("toashowattendance")
-    public String toashowattendance(HttpServletRequest request, HttpSession session, HttpServletResponse resp) {
+    public String toashowattendance(HttpServletRequest request, HttpSession session, HttpServletResponse resp)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
         List<Department> departments = departmentService.selectAllDepartment();
         session.setAttribute("chdepartment",departments);
@@ -199,6 +200,7 @@ public class AttendanceController {
     @RequestMapping("aselectattendance")
     public String aselectattendance(Integer T_DEPARTMENT,Integer T_POSITION,Integer T_STAFF,String yeart,Integer montht,HttpServletRequest req,HttpSession session, HttpServletResponse resp)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
+
         String m=null;
         if(montht>9){
             m= String.valueOf(montht);
@@ -206,17 +208,35 @@ public class AttendanceController {
             m="0"+montht;
         }
         String time=yeart+"-"+m;
-        if(T_STAFF!=null){
+        if(T_STAFF!=-1){
             List<Attendance> attendances = attendanceService.selectAttendancebymonthandsid(time, T_STAFF);
             req.setAttribute("staffattendance",attendances);
-            return "forward:toashowattendance";
-        }else if (T_POSITION!=null&&T_STAFF==null){
+
+        }else if (T_POSITION!=-1&&T_STAFF==-1){
             List<Staff> staffs = staffService.selectStaffbyposition(T_POSITION);
-
-        }else if(T_DEPARTMENT!=null&&T_POSITION==null){
-
-        }else if (T_DEPARTMENT==null){
-
+            List<Integer> sids=new ArrayList<>();
+            for (Staff staff : staffs) {
+                sids.add(staff.getT_ID());
+            }
+            List<Attendance> attendances = attendanceService.selectAttendancebymonthandmanysid(time, sids);
+            req.setAttribute("staffattendance",attendances);
+        }else if(T_DEPARTMENT!=-1&&T_POSITION==-1){
+            List<Staff> staffs = staffService.selectStaffbydepartmentid(T_DEPARTMENT);
+            List<Integer> sids=new ArrayList<>();
+            for (Staff staff : staffs) {
+                sids.add(staff.getT_ID());
+            }
+            List<Attendance> attendances = attendanceService.selectAttendancebymonthandmanysid(time, sids);
+            req.setAttribute("staffattendance",attendances);
+        }else if (T_DEPARTMENT==-1){
+            List<Staff> staffs = staffService.selectAllStaff();
+            List<Integer> sids=new ArrayList<>();
+            for (Staff staff : staffs) {
+                sids.add(staff.getT_ID());
+            }
+            List<Attendance> attendances = attendanceService.selectAttendancebymonthandmanysid(time, sids);
+            req.setAttribute("staffattendance",attendances);
         }
+        return "forward:toashowattendance";
     }
 }

@@ -13,7 +13,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -97,9 +100,12 @@ public class TrainingController {
 
 
     @RequestMapping("addatrain")
-    public void addatrain(Training training,  HttpServletResponse resp)throws Exception {
+    public void addatrain(String T_TITLE,String T_STARTTIME,String T_ENDTIME,String T_ADDRESS,String T_DETAIL,  HttpServletResponse resp)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
-        training.setT_LAUNCH(0);
+        DateFormat date=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        Date start = date.parse(T_STARTTIME);
+        Date end = date.parse(T_ENDTIME);
+        Training training=new Training(T_TITLE,T_DETAIL,start,end,T_ADDRESS,0);
         if(trainingService.insertTraining(training)){
             resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='toatrainingview';</script>");
         }else {
@@ -140,7 +146,7 @@ public class TrainingController {
         resp.setContentType("text/html;charset=UTF-8");
         Integer trainingid =(Integer) session.getAttribute("trainingid");
 
-        if(T_STAFF!=null){
+        if(T_STAFF!=-1){
             TrainDetail trainDetail = trainDetailService.selectTraindetailBytidandsid(trainingid, T_STAFF);
             if(trainDetail!=null){
                 resp.getWriter().write("<script>alert(\"人员已添加,无需重复添加\");window.location.href='tochoicepeople';</script>");
@@ -153,7 +159,7 @@ public class TrainingController {
             }
 
 
-        }else if (T_POSITION!=null&&T_STAFF==null){
+        }else if (T_POSITION!=-1&&T_STAFF==-1){
             List<Staff> staffs = staffService.selectStaffbyposition(T_POSITION);
             if(staffs!=null&&staffs.size()!=0){
                if(trainDetailService.insertTraindetailbypositions(staffs,trainingid)) {
@@ -164,7 +170,7 @@ public class TrainingController {
             }else {
                 resp.getWriter().write("<script>alert(\"无对应员工\");window.location.href='tochoicepeople';</script>");
             }
-        }else if(T_DEPARTMENT!=null&&T_POSITION==null){
+        }else if(T_DEPARTMENT!=-1&&T_POSITION==-1){
             List<Staff> staffs = staffService.selectStaffbydepartmentid(T_DEPARTMENT);
             if(staffs!=null&&staffs.size()!=0){
                 if(trainDetailService.insertTraindetailbypositions(staffs,trainingid)) {
@@ -175,7 +181,7 @@ public class TrainingController {
             }else {
                 resp.getWriter().write("<script>alert(\"无对应员工\");window.location.href='tochoicepeople';</script>");
             }
-        }else if (T_DEPARTMENT==null){
+        }else if (T_DEPARTMENT==-1){
             List<Staff> staffs = staffService.selectAllStaff();
             if(staffs!=null&&staffs.size()!=0){
                 if(trainDetailService.insertTraindetailbypositions(staffs,trainingid)) {
@@ -234,8 +240,17 @@ public class TrainingController {
 
 
     @RequestMapping("updatetrain")
-    public void updatetrain(Training training, HttpSession session, HttpServletResponse resp)throws Exception {
+    public void updatetrain(String T_TITLE,String T_STARTTIME,String T_ENDTIME,String T_ADDRESS,String T_DETAIL,Integer T_ID, HttpSession session, HttpServletResponse resp)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
+        Training training = trainingService.selectTrainingById(T_ID);
+        DateFormat date=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        Date start = date.parse(T_STARTTIME);
+        Date end = date.parse(T_ENDTIME);
+        training.setT_TITLE(T_TITLE);
+        training.setT_STARTTIME(start);
+        training.setT_ENDTIME(end);
+        training.setT_ADDRESS(T_ADDRESS);
+        training.setT_DETAIL(T_DETAIL);
         if(trainingService.updateTraining(training)){
             resp.getWriter().write("<script>alert(\"修改成功\");window.location.href='toatrainingview';</script>");
         }else{

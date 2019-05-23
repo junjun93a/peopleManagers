@@ -22,7 +22,7 @@
 %>
 <h3>欢迎您，<%=staff.getT_NAME()%></h3>
 <a href="tocard">考勤打卡</a>
-<a href="">查看个人奖惩信息</a>
+<a href="toshowrap">查看个人奖惩信息</a>
 <a href="toshowattendance">查看历史考勤信息</a>
 <a href="tostafflist">查看通讯录</a>
 <a href="">查看个人信息</a>

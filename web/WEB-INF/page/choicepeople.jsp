@@ -59,7 +59,7 @@
 <div>
     <form action="addstaff" method="post">
         部门：<select id="addDep" name="T_DEPARTMENT">
-        <option hidden>请选择﹀</option>
+        <option value="-1">全选﹀</option>
         <%
             if(departments!=null&&departments.size()!=0){
                 for (Department department : departments) {
@@ -72,7 +72,7 @@
     </select>
 
         职位：<select id="addPosit" name="T_POSITION">
-        <option hidden>请选择﹀</option>
+        <option value="-1">全选﹀</option>
     </select>
         员工： <select id="addstaff" name="T_STAFF">
         <option hidden>请选择﹀</option>
