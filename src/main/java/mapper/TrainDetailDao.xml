@@ -25,4 +25,7 @@ select * from P_TRAINDETAIL where T_IDSTAFF=#{sid}
     <select id="selectTraindetailbyTraining" resultType="model.TrainDetail">
 select * from P_TRAINDETAIL where T_IDTRAINING=#{tid}
     </select>
+    <select id="selectTraindetailBytidandsid" resultType="model.TrainDetail">
+        select * from P_TRAINDETAIL where T_IDTRAINING=#{0} T_IDSTAFF=#{1}
+    </select>
 </mapper>

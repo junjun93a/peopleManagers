@@ -15,7 +15,7 @@ UPDATE P_ATTENDANCE SET T_STARTTIME=#{T_STARTTIME,jdbcType=VARCHAR}, T_ENDTIME=#
 DELETE FROM P_ATTENDANCE WHERE T_ID=#{id}
     </delete>
     <select id="selectAllAttendance" resultType="model.Attendance">
-SELECT * FROM P_TRAINDETAIL
+SELECT * FROM P_ATTENDANCE
     </select>
     <select id="selectAllAttendancebystaffid" resultType="model.Attendance">
 SELECT * FROM P_TRAINDETAIL WHERE T_IDSTAFF=#{sid}

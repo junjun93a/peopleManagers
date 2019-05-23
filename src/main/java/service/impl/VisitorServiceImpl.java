@@ -13,12 +13,25 @@ public class VisitorServiceImpl implements VisitorService {
     private VisitorDao visitorDao;
 
 
-    public Boolean insertvisitor(Visitor visitor) {
+    public boolean insertvisitor(Visitor visitor) {
         if (visitor==null){
             return false;
         }
         Integer i = visitorDao.insertvisitor(visitor);
 
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updatevisitor(Visitor visitor) {
+        if (visitor==null){
+            return false;
+        }
+        Integer i = visitorDao.updatevisitor(visitor);
         if(i!=0){
             return true;
         }else {

@@ -12,6 +12,7 @@ public interface TrainDetailService {
     boolean deleteTraindetail(Integer id);
     boolean deleteTraindetailbystaff(Integer sid);
     TrainDetail selectTraindetailById(Integer id);
+    TrainDetail selectTraindetailBytidandsid(Integer tid,Integer sid);
     List<TrainDetail> selectTraindetailbystaff(Integer sid);
     List<TrainDetail> selectTraindetailbyTraining(Integer tid);
 }

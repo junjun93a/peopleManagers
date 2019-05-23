@@ -10,6 +10,7 @@ public interface TrainDetailDao {
     Integer deleteTraindetail(Integer id);
     Integer deleteTraindetailbystaff(Integer sid);
     TrainDetail selectTraindetailById(Integer id);
+    TrainDetail selectTraindetailBytidandsid(Integer tid,Integer sid);
     List<TrainDetail> selectTraindetailbystaff(Integer sid);
     List<TrainDetail> selectTraindetailbyTraining(Integer tid);
 }

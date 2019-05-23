@@ -28,6 +28,9 @@
             float: left;
             margin-left: 20px;
         }
+        .department{
+            overflow:hidden;
+        }
     </style>
 
 
@@ -94,7 +97,7 @@
         for (Department department : departments) {
             i++;
             %>
-            <li>
+            <li class="department">
                 <p>部门：<%=department.getT_NAME()%></p>
                 <p>成立时间：<%=department.getT_TIMES()%></p>
                 <a href="deletedepartment?did=<%=department.getT_ID()%>">删除部门</a>

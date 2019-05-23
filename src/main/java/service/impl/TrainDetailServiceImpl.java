@@ -39,7 +39,11 @@ public class TrainDetailServiceImpl implements TrainDetailService {
         }
         Integer i =0;
         for (Staff staff : staffs) {
-             i = trainDetailDao.insertTraindetail(new TrainDetail(staff.getT_ID(),tid));
+            TrainDetail trainDetail = trainDetailDao.selectTraindetailBytidandsid(tid, staff.getT_ID());
+            if(trainDetail==null){
+                i = trainDetailDao.insertTraindetail(new TrainDetail(staff.getT_ID(),tid));
+            }
+
         }
         if(i!=0){
             return true;
@@ -95,6 +99,14 @@ public class TrainDetailServiceImpl implements TrainDetailService {
             return null;
         }
         return trainDetailDao.selectTraindetailById(id);
+    }
+
+    @Override
+    public TrainDetail selectTraindetailBytidandsid(Integer tid, Integer sid) {
+        if (tid==null||tid==0||sid==null||sid==0){
+            return null;
+        }
+        return trainDetailDao.selectTraindetailBytidandsid(tid,sid);
     }
 
     @Override

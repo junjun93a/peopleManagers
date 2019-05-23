@@ -17,32 +17,69 @@ public class RewardandpunishServiceImpl implements RewardandpunishService {
 
     @Override
     public boolean insertRewardandpunish(Rewardandpunish rewardandpunish) {
+        if (rewardandpunish==null){
+            return false;
+        }
+        Integer i = rewardandpunishDao.insertRewardandpunish(rewardandpunish);
 
-        return false;
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
     @Override
-    public boolean updateRewardandpunish(Rewardandpunish resume) {
-        return false;
+    public boolean updateRewardandpunish(Rewardandpunish rewardandpunish) {
+        if (rewardandpunish==null){
+            return false;
+        }
+        Integer i = rewardandpunishDao.updateRewardandpunish(rewardandpunish);
+
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public boolean deleteRewardandpunish(Integer T_ID) {
-        return false;
+        if (T_ID==null||T_ID==0){
+            return false;
+        }
+        Integer i = rewardandpunishDao.deleteRewardandpunish(T_ID);
+
+        if(i!=0){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public List<Rewardandpunish> selectRewardandpunishbysid(Integer sid) {
-        return null;
+        if (sid==null||sid==0){
+            return null;
+        }
+        return rewardandpunishDao.selectRewardandpunishbysid(sid);
     }
 
     @Override
     public Rewardandpunish selectRewardandpunishbyid(Integer id) {
-        return null;
+        if (id==null||id==0){
+            return null;
+        }
+        return rewardandpunishDao.selectRewardandpunishbyid(id);
     }
 
     @Override
     public List<Rewardandpunish> selectRewardandpunishbysidanddate(Integer sid, String date) {
-        return null;
+
+        if (sid==null||sid==0||date!=null){
+            return null;
+        }
+        return rewardandpunishDao.selectRewardandpunishbysidanddate(sid,date);
     }
 }

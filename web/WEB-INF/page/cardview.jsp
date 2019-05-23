@@ -34,9 +34,14 @@
 
         $(function () {
 
-            $("#sub").mousedown(function () {
+            $("#sub").click(function () {
+                $("#confirmtime").html("");
                 $.post("confirmAttendance",{"time":$("#sysTime").text()},function (obj) {
+                    if(obj!=null){
 
+                        $("#confirmtime").append("<p>"+"打卡时间："+obj+"</p>")
+                        $("#sub").attr("value","下班打卡")
+                    }
                 })
             })
         })
@@ -49,23 +54,34 @@
 <a href="tostaffview">返回</a>
 <br>
 <hr>
+<div>
 <h1>上下班打卡</h1>
 
 <div>
     <span id="sysTime"></span>
-    <input type="button" id="sub" name="打卡">
+
+</div>
+<div>
+    <%
+        Integer isconfirm = (Integer) session.getAttribute("isconfirm");
+        if(0==isconfirm){
+            %>
+    <input type="button" id="sub" value="上班打卡">
+    <%
+        }else {
+            %>
+    <input type="button" id="sub" value="下班打卡">
+    <%
+        }
+    %>
+
 </div>
 
-<div id="starttime">
-    上班时间
+<div id="confirmtime">
+
 </div>
 
-<div id="endtime">
-    下班时间
-</div>
-<div id="error">
-    迟到旷工
-</div>
 
+</div>
 </body>
 </html>

@@ -139,32 +139,38 @@ public class TrainingController {
     public void addstaff(Integer T_DEPARTMENT,Integer T_POSITION,Integer T_STAFF,HttpServletRequest req,HttpSession session, HttpServletResponse resp)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
         Integer trainingid =(Integer) session.getAttribute("trainingid");
+
         if(T_STAFF!=null){
-            Staff staff = staffService.selectStaffbyid(T_STAFF);
-            if(trainDetailService.insertTraindetail(new TrainDetail(staff.getT_ID(),trainingid))){
-                resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='tochoicepeople';</script>");
+            TrainDetail trainDetail = trainDetailService.selectTraindetailBytidandsid(trainingid, T_STAFF);
+            if(trainDetail!=null){
+                resp.getWriter().write("<script>alert(\"人员已添加,无需重复添加\");window.location.href='tochoicepeople';</script>");
             }else {
-                resp.getWriter().write("<script>alert(\"添加失败\");window.location.href='tochoicepeople';</script>");
+                if(trainDetailService.insertTraindetail(new TrainDetail(T_STAFF,trainingid))){
+                    resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='tochoicepeople';</script>");
+                }else {
+                    resp.getWriter().write("<script>alert(\"添加失败\");window.location.href='tochoicepeople';</script>");
+                }
             }
+
+
         }else if (T_POSITION!=null&&T_STAFF==null){
             List<Staff> staffs = staffService.selectStaffbyposition(T_POSITION);
             if(staffs!=null&&staffs.size()!=0){
                if(trainDetailService.insertTraindetailbypositions(staffs,trainingid)) {
                    resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='tochoicepeople';</script>");
                }else {
-                   resp.getWriter().write("<script>alert(\"添加失败\");window.location.href='tochoicepeople';</script>");
+                   resp.getWriter().write("<script>alert(\"添加失败,添加职位重复\");window.location.href='tochoicepeople';</script>");
                }
             }else {
                 resp.getWriter().write("<script>alert(\"无对应员工\");window.location.href='tochoicepeople';</script>");
             }
         }else if(T_DEPARTMENT!=null&&T_POSITION==null){
-            List<Position> positions = positionService.selectPositionbydid(T_DEPARTMENT);
             List<Staff> staffs = staffService.selectStaffbydepartmentid(T_DEPARTMENT);
             if(staffs!=null&&staffs.size()!=0){
                 if(trainDetailService.insertTraindetailbypositions(staffs,trainingid)) {
                     resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='tochoicepeople';</script>");
                 }else {
-                    resp.getWriter().write("<script>alert(\"添加失败\");window.location.href='tochoicepeople';</script>");
+                    resp.getWriter().write("<script>alert(\"添加失败，添加部门重复\");window.location.href='tochoicepeople';</script>");
                 }
             }else {
                 resp.getWriter().write("<script>alert(\"无对应员工\");window.location.href='tochoicepeople';</script>");
@@ -175,7 +181,7 @@ public class TrainingController {
                 if(trainDetailService.insertTraindetailbypositions(staffs,trainingid)) {
                     resp.getWriter().write("<script>alert(\"添加成功\");window.location.href='tochoicepeople';</script>");
                 }else {
-                    resp.getWriter().write("<script>alert(\"添加失败\");window.location.href='tochoicepeople';</script>");
+                    resp.getWriter().write("<script>alert(\"添加失败，全员已添加\");window.location.href='tochoicepeople';</script>");
                 }
             }else {
                 resp.getWriter().write("<script>alert(\"无对应员工\");window.location.href='tochoicepeople';</script>");

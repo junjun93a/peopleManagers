@@ -199,6 +199,12 @@ public class SendController {
         Send send = sendService.selectSendbyid(sid);
         Resume resume = resumeService.selectResumebyid(send.getT_IDRESUME());
         Visitor visitor = visitorService.selectvisitorbyid(resume.getT_IDVISITOR());
+        if(visitor.getT_IDSTAFF()!=null){
+            Staff staff = staffService.selectStaffbyid(visitor.getT_IDSTAFF());
+            staff.setT_WORKINGSTATE(0);
+        }else {
+
+        }
         Recruit recruit = recruitService.selectRecruitById(send.getT_IDRECRUIT());
         String account=visitor.getT_ACCOUNT()+resume.getT_PHONE()%100;
         String pass=visitor.getT_PASS();
@@ -214,6 +220,9 @@ public class SendController {
         Date entrytime=new Date();
         Staff staff=new Staff(account,pass,name,sex,birthday,phone,email,age,address,workingstate,position,entrytime);
         if(staffService.insertStaff(staff,sid)){
+            Staff staff1 = staffService.selectStaffbyaccountandpass(staff);
+            visitor.setT_IDSTAFF(staff1.getT_ID());
+            visitorService.updatevisitor(visitor);
             resp.getWriter().write("<script>alert(\"录取成功\");window.location.href='toasendview';</script>");
 
         }else {

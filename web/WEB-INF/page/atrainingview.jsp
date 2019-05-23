@@ -34,7 +34,7 @@
                 "    培训内容：<input type=\"text\" name=\"T_DETAIL\"><br>\n" +
                 "    <input type=\"submit\" value=\"新增\">\n" +
                 "</form>")
-            $("##addtrain").attr("disabled","disabled")
+            $("#addtrain").attr("disabled","disabled")
         })
     })
 </script>

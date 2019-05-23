@@ -23,7 +23,7 @@
                 $.post("selectpositbydid",{"did":$(this).val()},function (obj) {
                     $("#updatePosit option").remove();
                     for(var i in obj){
-                        $("#updatePosit").append("<option value='"+obj[i]['T_ID']+"'>"+obj[i]['T_NAME']+"</option>")
+                        $("#updatePosit").append("<option value='"+obj[i]['t_ID']+"'>"+obj[i]['t_NAME']+"</option>")
                     }
                 })
             })

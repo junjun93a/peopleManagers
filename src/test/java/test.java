@@ -1,3 +1,4 @@
+import dao.AttendanceDao;
 import dao.StaffDao;
 import model.Staff;
 import model.Visitor;
@@ -40,4 +41,28 @@ public class test {
 
         System.out.println(visitor);
     }
+
+    @Test
+    public void test4(){
+        ApplicationContext context= new ClassPathXmlApplicationContext("bean.xml");
+        AttendanceDao attendanceDao= (AttendanceDao) context.getBean("attendanceDao");
+
+
+        System.out.println();
+    }
+
+    @Test
+    public void test5()throws Exception{
+       String time="2019-5-22 19:30:00";
+        DateFormat date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date timec = date.parse(time);
+        DateFormat date1=new SimpleDateFormat("yyyy-MM-dd");
+        String format = date1.format(timec);
+        String starttime=format+" 09:00:00";
+        String endtime=format+" 18:00:00";
+        Date s = date.parse(starttime);
+
+        System.out.println(s);
+    }
+
 }
