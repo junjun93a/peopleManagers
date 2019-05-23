@@ -6,6 +6,9 @@
     <insert id="insertvisitor">
         insert into P_VISITOR(T_ACCOUNT,T_PASS,T_SEX,T_NAME) values (#{T_ACCOUNT},#{T_PASS},#{T_SEX},#{T_NAME})
     </insert>
+    <update id="updatevisitor">
+        update P_VISITOR SET T_IDSTAFF=#{T_IDSTAFF} WHERE T_ID=#{T_ID}
+    </update>
 
     <select id="selectvisitorbyaccountpass" resultType="model.Visitor">
         select * from P_VISITOR where T_ACCOUNT=#{T_ACCOUNT} AND T_PASS=#{T_PASS}

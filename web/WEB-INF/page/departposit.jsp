@@ -42,6 +42,7 @@
     List<Department> departments =(List<Department>) session.getAttribute("departments");
 %>
 <a href="toadmin">返回</a>
+<br>
 <input type="button" value="新增部门" id="adddepart">
 <script src="jq/jquery-3.1.0.js"></script>
 <script>
@@ -127,9 +128,9 @@
                    <ul>
                     <%
                         for (Position position : positions) {
-
+                            j++;
                             if(position.getT_IDDEPARTMENT()==department.getT_ID()){
-                                j++;
+
                             %>
     <li class="position">
         <span><%=position.getT_NAME()%></span>

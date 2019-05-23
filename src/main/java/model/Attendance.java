@@ -10,7 +10,7 @@ public class Attendance {
     private String T_STARTTIME;
     private String T_ENDTIME;
     private Integer T_IDSTAFF;
-    private Integer T_ERROR;//0无问题，1迟到或早退，3旷工，4加班
+    private Integer T_ERROR;//0无问题，1迟到，2早退，3旷工，4加班，5又迟到又早退
     public Attendance() {
     }
 

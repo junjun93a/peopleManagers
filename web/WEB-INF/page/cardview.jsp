@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.Attendance" %><%--
   Created by IntelliJ IDEA.
   User: hasee
   Date: 2019/5/22
@@ -33,14 +33,19 @@
         }
 
         $(function () {
-
             $("#sub").click(function () {
                 $("#confirmtime").html("");
                 $.post("confirmAttendance",{"time":$("#sysTime").text()},function (obj) {
                     if(obj!=null){
-
                         $("#confirmtime").append("<p>"+"打卡时间："+obj+"</p>")
+
+                    }
+                })
+                $.post("checkAttendance",{"but":$("#sub").val()},function (obj) {
+                    if(1==obj){
                         $("#sub").attr("value","下班打卡")
+                    }else if(2==obj){
+                        $("#sub").attr("disabled","disabled")
                     }
                 })
             })
@@ -68,9 +73,16 @@
             %>
     <input type="button" id="sub" value="上班打卡">
     <%
-        }else {
+        }else if(1==isconfirm){
             %>
     <input type="button" id="sub" value="下班打卡">
+    <%
+        }else if(2==isconfirm){
+            Attendance showattendance =(Attendance) session.getAttribute("showattendance");
+    %>
+    <p>已打卡：</p>
+    <p>上班打卡时间：<%=showattendance.getT_STARTTIME()%></p>
+    <p>下班打卡时间：<%=showattendance.getT_ENDTIME()%></p>
     <%
         }
     %>

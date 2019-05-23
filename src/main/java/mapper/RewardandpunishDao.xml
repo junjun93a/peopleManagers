@@ -23,4 +23,7 @@
     <select id="selectRewardandpunishbysidanddate" resultType="model.Rewardandpunish">
         select * from P_REWARDANDPUNISH where T_IDSTAFF=#{0} and T_TIME=#{1}
     </select>
+    <select id="selectRewardandpunishbysidanddateandresaon" resultType="model.Rewardandpunish">
+         select * from P_REWARDANDPUNISH where T_IDSTAFF=#{0} and T_TIME=#{1} and T_REASON=#{2}
+    </select>
 </mapper>

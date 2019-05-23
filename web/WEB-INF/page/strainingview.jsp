@@ -27,7 +27,7 @@
     </style>
 </head>
 <body>
-<a href="/tostaffview">返回</a>
+<a href="tostaffview">返回</a>
 <br>
 <hr>
 <%

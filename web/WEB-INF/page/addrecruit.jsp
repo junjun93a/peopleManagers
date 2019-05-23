@@ -32,6 +32,7 @@
 
 </head>
 <body>
+<a href="toarecruit">返回</a>
 <%
     List<Department> departments =(List<Department>) session.getAttribute("rdepartments");
 %>

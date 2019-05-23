@@ -197,15 +197,10 @@ public class SendController {
     public void toyesstaff(Integer sid,HttpServletResponse resp, HttpSession session)throws Exception {
         resp.setContentType("text/html;charset=UTF-8");
         Send send = sendService.selectSendbyid(sid);
-        Resume resume = resumeService.selectResumebyid(send.getT_IDRESUME());
-        Visitor visitor = visitorService.selectvisitorbyid(resume.getT_IDVISITOR());
-        if(visitor.getT_IDSTAFF()!=null){
-            Staff staff = staffService.selectStaffbyid(visitor.getT_IDSTAFF());
-            staff.setT_WORKINGSTATE(0);
-        }else {
-
-        }
         Recruit recruit = recruitService.selectRecruitById(send.getT_IDRECRUIT());
+        Resume resume = resumeService.selectResumebyid(send.getT_IDRESUME());
+        Integer position=recruit.getT_POSITION();
+        Visitor visitor = visitorService.selectvisitorbyid(resume.getT_IDVISITOR());
         String account=visitor.getT_ACCOUNT()+resume.getT_PHONE()%100;
         String pass=visitor.getT_PASS();
         String name=resume.getT_NAME();
@@ -216,9 +211,18 @@ public class SendController {
         Integer age=resume.getT_AGE();
         String address=resume.getT_ADDRESS();
         Integer workingstate=0;
-        Integer position=recruit.getT_POSITION();
         Date entrytime=new Date();
-        Staff staff=new Staff(account,pass,name,sex,birthday,phone,email,age,address,workingstate,position,entrytime);
+        Staff staff =null;
+        if(visitor.getT_IDSTAFF()!=null){
+             staff = staffService.selectStaffbyid(visitor.getT_IDSTAFF());
+            staff.setT_WORKINGSTATE(0);
+            staff.setT_IDPOSITION(position);
+        }else {
+             staff=new Staff(account,pass,name,sex,birthday,phone,email,age,address,workingstate,position,entrytime);
+        }
+
+
+
         if(staffService.insertStaff(staff,sid)){
             Staff staff1 = staffService.selectStaffbyaccountandpass(staff);
             visitor.setT_IDSTAFF(staff1.getT_ID());

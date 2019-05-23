@@ -75,6 +75,14 @@ public class RewardandpunishServiceImpl implements RewardandpunishService {
     }
 
     @Override
+    public Rewardandpunish selectRewardandpunishbysidanddateandresaon(Integer sid, String date, String reason) {
+        if (sid==null||sid==0||date==null||reason==null){
+            return null;
+        }
+        return rewardandpunishDao.selectRewardandpunishbysidanddateandresaon(sid,date,reason);
+    }
+
+    @Override
     public List<Rewardandpunish> selectRewardandpunishbysidanddate(Integer sid, String date) {
 
         if (sid==null||sid==0||date!=null){

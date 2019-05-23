@@ -85,4 +85,12 @@ public class AttendServiceImpl implements AttendanceService {
         }
         return attendanceDao.selectAttendancebyid(id);
     }
+
+    @Override
+    public List<Attendance> selectAttendancebymonthandsid(String month, Integer sid) {
+        if (sid==null||sid==0||month==null){
+            return null;
+        }
+        return attendanceDao.selectAttendancebymonthandsid(month,sid);
+    }
 }

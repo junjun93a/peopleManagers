@@ -2,6 +2,8 @@ package model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Staff {
@@ -65,10 +67,17 @@ public class Staff {
     public Date getT_ENTRYTIME() {
         return T_ENTRYTIME;
     }
+    public String getT_ENTRYTIMEs() {
+        DateFormat format= new SimpleDateFormat("yyyy年MM月dd日");
+        String format1 = format.format( T_ENTRYTIME);
+        return format1;
 
+    }
     public void setT_ENTRYTIME(Date t_ENTRYTIME) {
+
         T_ENTRYTIME = t_ENTRYTIME;
     }
+
 
     public Integer getT_ID() {
         return T_ID;
@@ -112,6 +121,12 @@ public class Staff {
 
     public Date getT_BIRTHDAY() {
         return T_BIRTHDAY;
+    }
+    public String getT_BIRTHDAYS() {
+
+        DateFormat format= new SimpleDateFormat("yyyy年MM月dd日");
+        String format1 = format.format( T_BIRTHDAY);
+        return format1;
     }
 
     public void setT_BIRTHDAY(Date t_BIRTHDAY) {
@@ -201,17 +216,17 @@ public class Staff {
     }
     @Override
     public String toString() {
-        return "员工信息{" +
+        return "员工信息：" +
                 "员工id=" + T_ID +
                 ", 姓名='" + T_NAME + '\'' +
                 ", 性别='" + T_SEX + '\'' +
-                ", 出生日期=" + T_BIRTHDAY +
+                ", 出生日期=" + getT_BIRTHDAYS() +
                 ", 手机号码=" + T_PHONE +
                 ", 邮箱地址='" + T_EMAIL + '\'' +
                 ", 工龄=" + T_AGE +
                 ", 地址='" + T_ADDRESS + '\'' +
-                ", 入职时间='" + T_ENTRYTIME + '\'' +
-                '}';
+                ", 入职时间='" + getT_ENTRYTIMEs() + '\'' +
+                '|';
     }
 
 

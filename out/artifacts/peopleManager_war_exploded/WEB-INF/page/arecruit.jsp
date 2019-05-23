@@ -33,7 +33,8 @@
 <body>
 
 <a href="toaddrecruit">新增招聘信息</a>
-<a href="toadmin">管理员中心</a>
+
+<a href="toadmin">返回</a>
 <br>
 <hr>
 <%

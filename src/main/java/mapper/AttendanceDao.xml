@@ -26,4 +26,15 @@ SELECT * FROM P_ATTENDANCE WHERE T_DATE=#{0} AND T_IDSTAFF=#{1}
     <select id="selectAttendancebyid" resultType="model.Attendance">
 SELECT * FROM P_ATTENDANCE WHERE T_ID=#{id}
     </select>
+    <select id="selectAttendancebymonthandsid" resultType="model.Attendance">
+        <bind name="pattern" value="'%' + month + '%'" />
+        SELECT * FROM P_ATTENDANCE WHERE T_DATE like #{pattern} AND T_IDSTAFF=#{sid}
+    </select>
+    <select id="selectAttendancebymonthandmanysid" resultType="model.Attendance">
+        <bind name="pattern" value="'%' + month + '%'" />
+        SELECT * FROM P_ATTENDANCE WHERE T_DATE like #{pattern} AND
+        <foreach collection="sid" open="T_IDSTAFF in(" separator="," close=")" item="i">
+            #{i}
+        </foreach>
+    </select>
 </mapper>
